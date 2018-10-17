@@ -13,11 +13,11 @@
 
     <title>
         
-          tags - Every step counts | Zxd&#39;s Blog
+          跨域 - Every step counts | Zxd&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://onezx.github.io/tags/">
+    <link rel="canonical" href="https://onezx.github.io/2017/01/03/跨域/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -146,188 +146,155 @@
 
     <!-- Main Content -->
     
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>tags</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Tags.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#jsonp" title="jsonp">
+                            jsonp</a>
+                        
+                    </div>
+                    <h1>
+                        跨域
+                    </h1>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        January 03, 2017
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
-                
-                    <a href="#Node" title="Node" rel="1">Node</a>
-                
-                    <a href="#JavaScript" title="JavaScript" rel="2">JavaScript</a>
-                
-                    <a href="#npm" title="npm" rel="1">npm</a>
-                
-                    <a href="#time" title="time" rel="2">time</a>
-                
-                    <a href="#jsonp" title="jsonp" rel="1">jsonp</a>
-                
-            </div>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            <!-- 标签列表 -->
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Node">
-                    <span class="tag-text">Node</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2018/10/17/Node在云服务器上的部署/">
-                        <h2 class="post-title">
-                            Node在云服务器上的部署
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
+                <h2 id="跨域和跨域的几种方式"><a href="#跨域和跨域的几种方式" class="headerlink" title="跨域和跨域的几种方式"></a>跨域和跨域的几种方式</h2><p>一直想总结下有关跨域的知识点,趁着现在有点时间,敲敲写写也是不错的.</p>
+<blockquote>
+<p>跨域 </p>
+</blockquote>
+<p>跨域是指不同域名之间的相互访问.</p>
+<blockquote>
+<p>同源策略</p>
+</blockquote>
+<p>同源策略是浏览器的一种安全策略，所谓同源是指域名，协议，端口完全相同.</p>
+<hr>
+<p>因为浏览器同源策略的限制,本域的js不能操作其他域下的js,对象或数据.这跟浏览器有关,浏览器拦住了发送的消息,而与服务端无关.</p>
+<h3 id="跨域的方式"><a href="#跨域的方式" class="headerlink" title="跨域的方式"></a>跨域的方式</h3><p>理解了跨域和同源策略后,我们来看看有哪些方式可以解决跨域的,这里搜集了网上一些资料,再自己总结了一下.如果有不对的地方欢迎指出 :)</p>
+<hr>
+<h4 id="1-jsonp"><a href="#1-jsonp" class="headerlink" title="1. jsonp"></a>1. jsonp</h4><p>jsonp(json with padding)其本质是利用了<code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;</code>标签不受同源策略限制.由服务端返回一个预先定义好的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。这也是前端解决跨域问题最常见的方法.</p>
+<p>注意</p>
+<ul>
+<li><strong>只能使用get方法</strong>(因为script标签只能是get)</li>
+<li><strong>需要服务端的跨域支持</strong>(预先设定callback回调函数)</li>
+</ul>
+<p>比如,在服务端(node.js)做一层包装res.send(${req.query.callback}),添加一个函数,然后前端Ajax请求返回这个函数的调用.jsonp的优点是简单,兼容性好.缺点是只支持GET请求.</p>
+<h5 id="jsonp的产生"><a href="#jsonp的产生" class="headerlink" title="jsonp的产生"></a>jsonp的产生</h5><ol>
+<li>Ajax直接请求普通文件存在跨域无权访问的问题</li>
+<li>我们在调用js文件的时候不受跨域的影响,如引入jquery框架时.</li>
+<li>凡是拥有src这个属性的标签都可以跨域.如<code>&lt;script&gt;</code>,<code>&lt;img&gt;</code>,<code>&lt;iframe&gt;</code></li>
+<li>如果想通过纯前端跨域访问服务端数据,只能把远程服务器中的数据装进js格式的文件里</li>
+<li>而json又是一个轻量级的数据格式,且被原生js支持</li>
+<li>所以为了方便客户端请求数据,逐渐形成了一种非正式的传输协议,即jsonp,该协议有个要点是<strong>允许用户传递一个callback参数给服务端</strong></li>
+</ol>
+<h4 id="2-服务端代理-Proxy"><a href="#2-服务端代理-Proxy" class="headerlink" title="2. 服务端代理(Proxy)"></a>2. 服务端代理(Proxy)</h4><p>网站A获取网站B上的资源内容,跨域方式分为<code>B网站可控</code>和<code>B网站不可控</code>,利用代理(proxy)这种方法实现跨域时,B网站不可控.</p>
+<blockquote>
+<p>proxy原理</p>
+</blockquote>
+<p>网站A将访问网站B的请求通过参数的形式发送给代理服务器(proxy),代理服务器收到请求后转而去访问网站B,然后将获取的信息再返回给网站A,形成一个数据请求回路.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A --&gt;request--&gt;  Proxy --&gt;request--&gt; B</span><br><span class="line">A --&lt;response&lt;-- Proxy --response&lt;-- B</span><br></pre></td></tr></table></figure>
+<h3 id="其他一些跨域方式"><a href="#其他一些跨域方式" class="headerlink" title="其他一些跨域方式"></a>其他一些跨域方式</h3><ol>
+<li>同主域名下iframe控制document.domain跨域</li>
+<li>location.hash+iframe</li>
+<li>window.name+iframe</li>
+<li>将数据通过js进行直接加载</li>
+<li>html5中的postMessage</li>
+<li>利用CORS进行跨域</li>
+<li>web sockets</li>
+</ol>
+<hr>
+<p>暂时先总结这么多,代码后期再补上吧~睡觉睡觉,晚安.</p>
+<!-- <h3>Whatever is worth doing is worth doing well.</h3>  -->
+
+
                 <hr>
+
                 
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/01/04/cnpm和yarn/" data-toggle="tooltip" data-placement="top"
+                            title="cnpm和yarn">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/12/31/时间/" data-toggle="tooltip" data-placement="top"
+                            title="时间的朋友">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="JavaScript">
-                    <span class="tag-text">JavaScript</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/03/28/arguments/">
-                        <h2 class="post-title">
-                            arguments
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/01/06/函数的四种调用模式/">
-                        <h2 class="post-title">
-                            函数的四种调用模式
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="npm">
-                    <span class="tag-text">npm</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/01/04/cnpm和yarn/">
-                        <h2 class="post-title">
-                            cnpm和yarn
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="time">
-                    <span class="tag-text">time</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/01/05/从前车马很慢/">
-                        <h2 class="post-title">
-                            从前车马很慢
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2016/12/31/时间/">
-                        <h2 class="post-title">
-                            时间的朋友
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="jsonp">
-                    <span class="tag-text">jsonp</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2017/01/03/跨域/">
-                        <h2 class="post-title">
-                            跨域
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
+            <!-- Side Catalog Container -->
             
 
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
 
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
 
 
     <!-- Footer -->

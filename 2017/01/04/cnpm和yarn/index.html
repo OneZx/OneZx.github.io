@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          cnpm和yarn - Every step counts | Zxd&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://onezx.github.io/2017/01/04/cnpm和yarn/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Zxd&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                        <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">archive</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#npm" title="npm">
+                            npm</a>
+                        
+                    </div>
+                    <h1>
+                        cnpm和yarn
+                    </h1>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        January 04, 2017
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="1-NPM"><a href="#1-NPM" class="headerlink" title="1.NPM"></a>1.NPM</h2><p>想想还是从介绍npm开始吧.NPM是随同NodeJS一起安装的包管理工具(Node Packaged Modules),通过npm可以下载和安装nodejs的模块包.在node官网下载安装node后,自带了这个工具.</p>
+<p>附上<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Nodejs官网</a></p>
+<h3 id="npm的简单指令"><a href="#npm的简单指令" class="headerlink" title="npm的简单指令"></a>npm的简单指令</h3><blockquote>
+<p>npm安装模块</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;Module Name&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>全局安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;M&gt; -g <span class="comment">#全局</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>卸载模块</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall &lt;Module Name&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看模块</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm ls</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更新模块</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm update &lt;Module Name&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>搜索模块</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm search &lt;Module Name&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>创建模块</p>
+</blockquote>
+<p>即模块初始化,创建模块时,package.json文件不可少,可以使用生成这个文件.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>安装并作为package.json的一个依赖(dependency)</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install &lt;pkg&gt; --save</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看帮助</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="built_in">help</span> &lt;<span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="package-json属性"><a href="#package-json属性" class="headerlink" title="package.json属性"></a>package.json属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- name 			--包名</span><br><span class="line">- version 		--包的版本号</span><br><span class="line">- description	--包的描述</span><br><span class="line">- homepage		--包的官网url</span><br><span class="line">- author 		--包的作者姓名</span><br><span class="line">- contributors  --包的其他贡献者姓名</span><br><span class="line">- dependencies  --依赖包列表</span><br><span class="line">- repository    --包代码存放的地方的类型</span><br><span class="line">- main 			--main字段是一个模块ID,它是一个指向你程序的主要项目</span><br><span class="line">- keywords 		--关键字</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="CNPM"><a href="#CNPM" class="headerlink" title="CNPM"></a>CNPM</h2><p>CNPM其实就是<code>淘宝NPM镜像</code>,这是一个完整npmjs.org镜像,可以用此代替官方版本(只读),同步频率目前为<code>10分钟</code>一次以保证尽量与官方服务同步.</p>
+<p>因为npm安装package是从国外服务器下载,速度会受较大影响.如果npm的服务器在国内就会大大的提高下载速度,于是淘宝团队就将整个服务端包都复制了一模一样的,10分钟更新一次,方便国内用户下载</p>
+<p><a href="https://npm.taobao.org/" target="_blank" rel="noopener">cnpm官网</a></p>
+<blockquote>
+<p>CNPM安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>安装了cnpm后,再安装package就可以用cnpm</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install &lt;Module Name&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>同步模块</p>
+</blockquote>
+<p>可以通过sync命令马上同步一个模块,只有cnpm才有这个命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm sync connect</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>cnpm不能使用<code>cnpm publish</code></p>
+</blockquote>
+<hr>
+<h2 id="使用nrm快速切换npm源"><a href="#使用nrm快速切换npm源" class="headerlink" title="使用nrm快速切换npm源"></a>使用nrm快速切换npm源</h2><p>nrm是一个npm源管理器,能让我们在npm源间快速切换.<a href="https://github.com/Pana/nrm" target="_blank" rel="noopener">nrm的github</a></p>
+<blockquote>
+<p>install</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g nrm</span><br></pre></td></tr></table></figure>
+<h3 id="nrm使用"><a href="#nrm使用" class="headerlink" title="nrm使用"></a>nrm使用</h3><blockquote>
+<p>列出可用源</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nrm ls</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> npm ---- https://registry.npmjs.org/</span><br><span class="line">* cnpm --- http://r.cnpmjs.org/</span><br><span class="line">  taobao - http://registry.npm.taobao.org/</span><br><span class="line">  nj ----- https://registry.nodejitsu.com/</span><br><span class="line">  rednpm - http://registry.mirror.cqupt.edu.cn</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>切换现有源</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm use taobao</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加源</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nrm add &lt;registry&gt; &lt;url&gt; [home]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>删除源</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm del &lt;registry&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>测试所有源速度</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nrm <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  npm ---- 891ms</span><br><span class="line">  cnpm --- 1213ms</span><br><span class="line">* taobao - 460ms</span><br><span class="line">  eu ----- 3859ms</span><br><span class="line">  au ----- 1073ms</span><br><span class="line">  sl ----- 4150ms</span><br><span class="line">  nj ----- 8008ms</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="yarn"><a href="#yarn" class="headerlink" title="yarn"></a>yarn</h2><p>终于写到yarn了,yarn是facebook在16年10月11日公开的js包管理工具,用来替代目前广泛使用的npm.<a href="https://github.com/yarnpkg/yarn" target="_blank" rel="noopener">yarn的github项目地址</a>.可以看到目前(17年01.04)已有2万多Star了.</p>
+<p>yarn和npm都作为nodejs的包管理工具.但相比npm.yarn具有的新亮点如下</p>
+<ul>
+<li>网络优化</li>
+<li>安全–下载前会检查签名和包的完整性</li>
+<li>离线模式–如果之前安装过一个包,再次安装就不用从网络下载了</li>
+<li>依赖关系确定性</li>
+<li>扁平模式</li>
+</ul>
+<blockquote>
+<p>总结来说,yarn具有快速,安全,可靠的特点</p>
+</blockquote>
+<h3 id="yarn的安装"><a href="#yarn的安装" class="headerlink" title="yarn的安装"></a>yarn的安装</h3><p>这里给出官方文档 <a href="https://yarnpkg.com/en/docs/install" target="_blank" rel="noopener">yarn的安装</a>,没有中文版,比较新.看不懂的话可以使用有道翻译下~~</p>
+<h3 id="yarn的使用"><a href="#yarn的使用" class="headerlink" title="yarn的使用"></a>yarn的使用</h3><blockquote>
+<p>项目初始化.切到项目下,会在根目录生成package.json</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn init</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加依赖.添加包,会自动安装最新版本</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add &lt;package&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更新依赖</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn upgrade [package] — 更新某个包</span><br><span class="line">yarn upgrade [package]@[version] — 指定更新到某个版本</span><br><span class="line">yarn upgrade [package]@[tag] — 指定更新版本到某个标签</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>移除依赖</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn remove &lt;package&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>yarn里有个很重要的文件<code>yarn.lock</code>,在项目根目录下,不要去动它,在其他电脑初始化时,需要把<code>package.json</code>和<code>yarn.lock</code>都复制过去</p>
+<hr>
+<p>写了好久,今天就大概总结这么多吧.网上搜了很多资料,如果有不准确的地方欢迎指正 :）</p>
+<!-- <h3>Accept what was and what is, and you’ll have more positive energy to pursue what will be.</h3> -->
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/01/05/从前车马很慢/" data-toggle="tooltip" data-placement="top"
+                            title="从前车马很慢">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/01/03/跨域/" data-toggle="tooltip" data-placement="top"
+                            title="跨域">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+            <!-- Side Catalog Container -->
+            
+
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;
+                    Zxd&#39;s Blog
+                    2018
+                    <br>
+                    <!-- Powered by <a href="https://onezx.github.io">Zxd</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+                        height="20px" src="https://ghbtns.com/github-btn.html?user=OneZx&repo=OneZx.github.io&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if ($('#tag_cloud').length !== 0) {
+        async("https://onezx.github.io/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: { start: '#bbbbee', end: '#0085a1' },
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<!-- cdn换过了 -->
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+    <!-- Image to hack wechat -->
+    <!-- <img src="https://onezx.github.io/img/icon_wechat.jpeg" width="0" height="0" /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

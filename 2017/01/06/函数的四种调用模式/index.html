@@ -13,11 +13,11 @@
 
     <title>
         
-          Node在云服务器上的部署 - Every step counts | Zxd&#39;s Blog
+          函数的四种调用模式 - Every step counts | Zxd&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://onezx.github.io/2018/10/17/Node在云服务器上的部署/">
+    <link rel="canonical" href="https://onezx.github.io/2017/01/06/函数的四种调用模式/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -163,12 +163,12 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Node" title="Node">
-                            Node</a>
+                        <a class="tag" href="/tags/#JavaScript" title="JavaScript">
+                            JavaScript</a>
                         
                     </div>
                     <h1>
-                        Node在云服务器上的部署
+                        函数的四种调用模式
                     </h1>
                     <h2 class="subheading">
                         
@@ -176,7 +176,7 @@
                     <span class="meta">
                         Posted by
                         Zxd on
-                        October 17, 2018
+                        January 06, 2017
                     </span>
                 </div>
             </div>
@@ -195,56 +195,48 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <ol>
-<li>使用 Xshell6 远程登录服务器 –&gt; 查看有道云笔记 账号密码忘记时</li>
-<li>腾讯云服务 操作手册–&gt; 重装系统 <a href="https://cloud.tencent.com/document/product/213/4933" target="_blank" rel="noopener">操作手册</a></li>
-<li>部署文档 – <a href="https://segmentfault.com/a/1190000007124759" target="_blank" rel="noopener">腾讯云部署 segmentfault</a></li>
-</ol>
-<h3 id="CentOS-部署"><a href="#CentOS-部署" class="headerlink" title="CentOS 部署"></a>CentOS 部署</h3><ol>
-<li>用 xshell 登录服务器</li>
-<li>把 yum 更新到最新版本 <code>yum -y update</code></li>
-<li>安装编译源代码工具 <code>yum -y groupinstall &quot;Development Tools&quot;</code></li>
-</ol>
+                <p>以前在gitbook上总结的,这里直接贴过来了.</p>
+<h3 id="函数调用的四种模式"><a href="#函数调用的四种模式" class="headerlink" title="函数调用的四种模式"></a>函数调用的四种模式</h3><ul>
+<li>函数调用模式</li>
+<li>方法模式</li>
+<li>构造器调用模式</li>
+<li>上下文模式</li>
+</ul>
+<h4 id="1-函数模式"><a href="#1-函数模式" class="headerlink" title="1. 函数模式"></a>1. 函数模式</h4><blockquote>
+<p>就是通过函数来调用，规范写法为：<code>function fn(){}; fn()</code>; 函数中<code>this</code>指向=&gt;<code>window</code></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明式函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//表达式函数</span></span><br><span class="line"><span class="keyword">var</span> fn2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用 这种调用模式函数中this表示全局对象,在浏览器中指window</span></span><br><span class="line">fn1(); <span class="comment">//window</span></span><br><span class="line">fn2(); <span class="comment">//window</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-方法模式"><a href="#2-方法模式" class="headerlink" title="2. 方法模式"></a>2. 方法模式</h4><blockquote>
+<p>函数依附于一个对象，是对象的一个属性，我们再调用这个函数。这种模式就是方法调用模式。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">name:<span class="string">"jack"</span>,</span><br><span class="line">sayHi:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.sayHi(); <span class="comment">// obj对象</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-构造器调用模式"><a href="#3-构造器调用模式" class="headerlink" title="3. 构造器调用模式"></a>3. 构造器调用模式</h4><blockquote>
+<p>即构造函数的调用，一般是通过new + 函数名( ),此方式中this指向new创建的新对象</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//Foo</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f1=<span class="keyword">new</span> Foo();</span><br></pre></td></tr></table></figure>
 <ul>
-<li>ps. <code>apt-get</code>是 Ubuntu 的命令, CentOS 使用的是<code>yum</code>, <code>vi app.js</code>可以创建 app.js 文件并进入编辑页面</li>
+<li>构造函数的返回值:</li>
+<li>默认返回值是新创建的对象(实例)</li>
+<li>当手动添加返回值后(<code>return</code>语句)</li>
 </ul>
-<h4 id="安装-node-和-pm2"><a href="#安装-node-和-pm2" class="headerlink" title="安装 node 和 pm2"></a>安装 node 和 pm2</h4><ul>
-<li>在云服务器上安装 node.js <a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="noopener">node.js 服务器安装</a></li>
-<li>CentOS 安装 node.js v8 <code>curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</code></li>
-<li>执行完上一个命令后 <code>yum -y install nodejs</code></li>
-<li>安装 pm2 <code>npm install -g pm2</code></li>
-</ul>
-<h4 id="安装-mongodb-CentOS"><a href="#安装-mongodb-CentOS" class="headerlink" title="安装 mongodb (CentOS)"></a>安装 mongodb (CentOS)</h4><ol>
-<li><p>配置包管理系统(yum) Configure the package management system</p>
 <ol>
-<li>创建 yum 源文件</li>
-<li>cd 到 yum.repos.d <code>[root@VM_0_14_centos ~]# cd /etc/yum.repos.d/</code></li>
-<li>创建 <code>touch</code>命令 <code>[root@VM_0_14_centos ~]# touch mongodb-org-4.0.repo</code></li>
-<li>查阅 <code>cat</code>命令 <code>[root@VM_0_14_centos ~]# cat mongodb-org-4.0.repo</code></li>
-<li>通过 vim 命令 可以直接创建并进入编辑 <code>vim /etc/yum.repos.d/mongodb-org-4.0.repo</code></li>
-<li>ps. (rm 删除 ls 列出), 如果不太了解 vim 编辑器的操作,需自己学习 vim 的命令 <a href="https://blog.csdn.net/u010956473/article/details/74087608" target="_blank" rel="noopener">vim 操作命令</a></li>
+<li>返回值是基本数据类型(值类型)=&gt;真正的返回值还是那个新创建的对象（即实例）</li>
+<li>返回值是复杂数据类型(对象)=&gt;返回值是这个对象</li>
 </ol>
-</li>
-<li><p>安装 Install the MongoDB packages</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mongodb-org</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="安装-nginx"><a href="#安装-nginx" class="headerlink" title="安装 nginx"></a>安装 nginx</h4><ol>
-<li><code>yum install nginx</code> <code>nginx -v</code>查看版本</li>
-<li><code>cd /ect/nginx/</code> <code>ls</code> 找到<code>conf.d</code></li>
-<li><code>[root@VM_0_14_centos conf.d]# pwd</code> 查看当前路径<code>pwd</code></li>
-<li>新建一个配置文件 <code>vi node-8081.conf</code></li>
-<li><code>nginx -t</code> 检测配置文件是否有错</li>
-</ol>
+<blockquote>
+<p>构造函数调用例子</p>
+</blockquote>
 <ul>
-<li>github nvm</li>
-<li>pm2 status 查看运行</li>
-<li>pm2 log 查看</li>
-<li>pm2 stop id 停止运行某个服务</li>
-<li>nginx -s reload 重启</li>
-<li>查看 80 端口占用情况 <code>sudo netstat -apn | grep 80</code> 干掉某个 pid <code>kill pid</code></li>
-<li>pid(进程 id Process Identification)</li>
+<li>如果一个函数的返回值是一个值类型，那么这个函数作为构造函数用new运算符执行构造时，它的返回值将被丢弃。new 表达式的结果仍然是this所引用的对象。</li>
 </ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">this</span>.a=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> m=<span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">var</span> n=test();</span><br><span class="line"><span class="built_in">console</span>.log(m);<span class="comment">// 返回Object=&gt;test</span></span><br><span class="line"><span class="built_in">console</span>.log(n);<span class="comment">// 返回1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果一个函数的返回值是引用类型（数组，对象或者函数）的数据，那么这个函数作为构造函数用new运算符执行构造时，运算的结果将被它的返回值取代，这时候，构造函数体内的this值丢失了，取而代之的是被返回的对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">this</span>.a=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> test();</span><br><span class="line"><span class="keyword">var</span> n = test();</span><br><span class="line"><span class="built_in">console</span>.log(m);<span class="comment">//返回return后面的闭包 function()&#123;return 1;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(n);<span class="comment">//返回return后面的闭包 function()&#123;return 1;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-上下文模式"><a href="#4-上下文模式" class="headerlink" title="4. 上下文模式"></a>4. 上下文模式</h4><blockquote>
+<p>本质–对象借用不属于该对象的方法(函数),即,我们自定义this的指向;这时候需要<code>call</code>和<code>apply</code>这两个方法</p>
+</blockquote>
 
 
                 <hr>
@@ -253,10 +245,15 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2017/03/28/arguments/" data-toggle="tooltip" data-placement="top"
+                            title="arguments">&larr; Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2017/03/28/arguments/" data-toggle="tooltip" data-placement="top"
-                            title="arguments">Next Post &rarr;</a>
+                        <a href="/2017/01/05/从前车马很慢/" data-toggle="tooltip" data-placement="top"
+                            title="从前车马很慢">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
