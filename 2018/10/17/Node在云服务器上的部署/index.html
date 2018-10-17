@@ -13,11 +13,11 @@
 
     <title>
         
-          Every step counts | Zxd&#39;s Blog
+          Node在云服务器上的部署 - Every step counts | Zxd&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://onezx.github.io/">
+    <link rel="canonical" href="https://onezx.github.io/2018/10/17/Node在云服务器上的部署/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -145,169 +145,165 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Zxd&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Every step counts</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Node" title="Node">Node</a>
+                        
+                          <a class="tag" href="/tags/#MongoDB" title="MongoDB">MongoDB</a>
+                        
+                          <a class="tag" href="/tags/#PM2" title="PM2">PM2</a>
+                        
+                    </div>
+                    <h1>Node在云服务器上的部署</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Zxd on
+                        October 17, 2018
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-
-<div class="post-preview">
-
-    <a href="/2018/10/17/Node在云服务器上的部署/">
-        <h2 class="post-title">
-            Node在云服务器上的部署
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-使用 Xshell6 远程登录服务器 –&gt; 查看有道云笔记 账号密码忘记时
-腾讯云服务 操作手册–&gt; 重装系统 操作手册
-部署文档 – 腾讯云部署 segmentfault
-
-CentOS 部署
-用 xshell 登录服务器
-把 yum 更新到最新版本 yum -y update
-安装编译源代码工具 yum -y groupinstall &quot;Development T......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Zxd on
-        October 17, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/16/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Zxd on
-        October 16, 2018
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
+                <ol>
+<li>使用 Xshell6 远程登录服务器 –&gt; 查看有道云笔记 账号密码忘记时</li>
+<li>腾讯云服务 操作手册–&gt; 重装系统 <a href="https://cloud.tencent.com/document/product/213/4933" target="_blank" rel="noopener">操作手册</a></li>
+<li>部署文档 – <a href="https://segmentfault.com/a/1190000007124759" target="_blank" rel="noopener">腾讯云部署 segmentfault</a></li>
+</ol>
+<h3 id="CentOS-部署"><a href="#CentOS-部署" class="headerlink" title="CentOS 部署"></a>CentOS 部署</h3><ol>
+<li>用 xshell 登录服务器</li>
+<li>把 yum 更新到最新版本 <code>yum -y update</code></li>
+<li>安装编译源代码工具 <code>yum -y groupinstall &quot;Development Tools&quot;</code></li>
+</ol>
+<ul>
+<li>ps. <code>apt-get</code>是 Ubuntu 的命令, CentOS 使用的是<code>yum</code>, <code>vi app.js</code>可以创建 app.js 文件并进入编辑页面</li>
+</ul>
+<h4 id="安装-node-和-pm2"><a href="#安装-node-和-pm2" class="headerlink" title="安装 node 和 pm2"></a>安装 node 和 pm2</h4><ul>
+<li>在云服务器上安装 node.js <a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="noopener">node.js 服务器安装</a></li>
+<li>CentOS 安装 node.js v8 <code>curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</code></li>
+<li>执行完上一个命令后 <code>yum -y install nodejs</code></li>
+<li>安装 pm2 <code>npm install -g pm2</code></li>
+</ul>
+<h4 id="安装-mongodb-CentOS"><a href="#安装-mongodb-CentOS" class="headerlink" title="安装 mongodb (CentOS)"></a>安装 mongodb (CentOS)</h4><ol>
+<li><p>配置包管理系统(yum) Configure the package management system</p>
+<ol>
+<li>创建 yum 源文件</li>
+<li>cd 到 yum.repos.d <code>[root@VM_0_14_centos ~]# cd /etc/yum.repos.d/</code></li>
+<li>创建 <code>touch</code>命令 <code>[root@VM_0_14_centos ~]# touch mongodb-org-4.0.repo</code></li>
+<li>查阅 <code>cat</code>命令 <code>[root@VM_0_14_centos ~]# cat mongodb-org-4.0.repo</code></li>
+<li>通过 vim 命令 可以直接创建并进入编辑 <code>vim /etc/yum.repos.d/mongodb-org-4.0.repo</code></li>
+<li>ps. (rm 删除 ls 列出), 如果不太了解 vim 编辑器的操作,需自己学习 vim 的命令 <a href="https://blog.csdn.net/u010956473/article/details/74087608" target="_blank" rel="noopener">vim 操作命令</a></li>
+</ol>
+</li>
+<li><p>安装 Install the MongoDB packages</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mongodb-org</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="安装-nginx"><a href="#安装-nginx" class="headerlink" title="安装 nginx"></a>安装 nginx</h4><ol>
+<li><code>yum install nginx</code> <code>nginx -v</code>查看版本</li>
+<li><code>cd /ect/nginx/</code> <code>ls</code> 找到<code>conf.d</code></li>
+<li><code>[root@VM_0_14_centos conf.d]# pwd</code> 查看当前路径<code>pwd</code></li>
+<li>新建一个配置文件 <code>vi node-8081.conf</code></li>
+<li><code>nginx -t</code> 检测配置文件是否有错</li>
+</ol>
+<ul>
+<li>github nvm</li>
+<li>pm2 status 查看运行</li>
+<li>pm2 log 查看</li>
+<li>pm2 stop id 停止运行某个服务</li>
+<li>nginx -s reload 重启</li>
+<li>查看 80 端口占用情况 <code>sudo netstat -apn | grep 80</code> 干掉某个 pid <code>kill pid</code></li>
+<li>pid(进程 id Process Identification)</li>
 </ul>
 
 
+                <hr>
 
-                <!-- 如果开启评论功能 -->
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/10/16/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Node" title="Node">Node</a>
                         
-                            
+                          <a class="tag" href="/tags/#MongoDB" title="MongoDB">MongoDB</a>
                         
-                            
-                        
-                            
+                          <a class="tag" href="/tags/#PM2" title="PM2">PM2</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar-zxd.jpeg" />
-                        
-
-                        
-                            <p>从前车马很慢 书信很远</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-
-                            
-
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
 
     <!-- Footer -->
