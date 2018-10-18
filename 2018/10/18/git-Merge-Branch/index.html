@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <title>
+        
+        Git Merge Branch - Every step counts | Zxd&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://onezx.github.io/2018/10/18/git-Merge-Branch/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Zxd&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">archive</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Git" title="Git">
+                            Git</a>
+                        
+                    </div>
+                    <h1>
+                        Git Merge Branch
+                    </h1>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        October 18, 2018
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="1-Showing-Your-Remotes"><a href="#1-Showing-Your-Remotes" class="headerlink" title="1. Showing Your Remotes"></a>1. Showing Your Remotes</h4><p><code>git remote</code>. It lists the shortnames of each remote handle you’ve specified.<br>列出指定的每一个远程服务器的简写,如果已经克隆了自己的 repository,那么至少能看到<code>origin</code>,这是 clone repository 服务器的默认名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git remote</span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>git remote -v</code>. 会列出 <code>urls</code> 和 <code>shortname of remote</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  git@github.com:OneZx/Git.git (fetch)</span><br><span class="line">origin  git@github.com:OneZx/Git.git (push)</span><br></pre></td></tr></table></figure>
+<h4 id="2-Adding-Remote-Repositories"><a href="#2-Adding-Remote-Repositories" class="headerlink" title="2. Adding Remote Repositories"></a>2. Adding Remote Repositories</h4><ul>
+<li><code>git remote add &lt;shortname&gt; &lt;url&gt;</code> ,指定一个远程仓库的简写名称 shortname</li>
+<li><p><code>git remote -v</code> 查看刚才添加的</p>
+</li>
+<li><p><code>git fetch &lt;remote-name&gt;</code> fetch 拉取远程仓库中有但自己没有的信息,我们可以直接使用<code>&lt;remote-name&gt;</code></p>
+</li>
+</ul>
+<p>The command goes out to that remote project and pulls down all the data from that remote project that you don’t have yet.执行完后,将会拥有那个 repository 中所有分支的引用,可以随时合并或查看</p>
+<ul>
+<li>ps.<code>git fetch</code>会将数据拉取到本地仓库,但并不会自动合并或修改当前的工作,You have to merge it manually into your work when you’re ready.</li>
+</ul>
+<p>If your current branch is set up to track a remote branch (see the next section and Git Branching for more information), you can use the <code>git pull</code> command to automatically <code>fetch and then merge</code> that remote branch into your current branch.</p>
+<ul>
+<li><code>git pull</code>命令会<code>fetch</code>数据并且 <code>merge</code> remote branch 到 current branch,运行 git pull 通常会从最初克隆的服务器上抓取数据并自动尝试合并到当前所在的分支。</li>
+</ul>
+<h4 id="3-Pushing-to-Your-Remotes"><a href="#3-Pushing-to-Your-Remotes" class="headerlink" title="3. Pushing to Your Remotes"></a>3. Pushing to Your Remotes</h4><ul>
+<li><code>git push [remote-name] [branch-name]</code> 将 master 分支推送到 origin 服务器时(git clone 一个 repository 会自动设置好这两个名字)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<p>如果在 push 之前有人 push 过了,当前推送就会被拒绝,需要先 pull 下来(fetch and merge)合并到自己的里之后才能推送</p>
+<p><strong>查看 remote repository</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote show origin  // show &lt;remote-name&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="4-Renaming-and-Removing-Remotes"><a href="#4-Renaming-and-Removing-Remotes" class="headerlink" title="4. Renaming and Removing Remotes"></a>4. Renaming and Removing Remotes</h4><ul>
+<li>重命名 名为 test 的远程仓库 为 haha</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote rename test haha</span><br></pre></td></tr></table></figure>
+<p>这同样也会修改远程分支名字,那些过去引用 test/master 的现在会引用 haha/master</p>
+<ul>
+<li>移除某个远程仓库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote rm &lt;remote-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-Git-Branching"><a href="#2-Git-Branching" class="headerlink" title="2. Git Branching"></a>2. Git Branching</h2><h4 id="1-Creating-a-New-Branch"><a href="#1-Creating-a-New-Branch" class="headerlink" title="1. Creating a New Branch"></a>1. Creating a New Branch</h4><p>let’s create a new bracnch called <code>testing</code>, this creates a new pointer for you to move around.<br>创建了一个可以移动的指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch testing</span><br></pre></td></tr></table></figure>
+<p>Git keeps a special pointer called <code>HEAD</code>, In Git, this is a pointer to the local branch you’re currently on. <code>git branch</code> 命令仅仅创建了一个新分支,并不会自动切换到新分支中去,<code>HEAD</code>仍指向主分支<code>master</code></p>
+<p>We can easily see this by running a simple <code>git log</code> command that shows us where the branch pointers are pointing. This option is called <code>--decorate</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git log --oneline --decorate</span><br><span class="line">4b8a874 (HEAD -&gt; master, origin/master, testing) add reset to specified commit</span><br><span class="line">40e04a0 add remote repository command</span><br><span class="line">451279f 添加撤销操作git reset</span><br><span class="line">229054e git使用说明md笔记,添加部分</span><br><span class="line">7186a23 git使用说明md笔记第二章</span><br></pre></td></tr></table></figure>
+<p>You can see the “master” and “testing” branches that are right there next to the f30ab commit.</p>
+<p><strong>查看项目分支(本地和远程)</strong></p>
+<ul>
+<li><code>git branch -a</code></li>
+</ul>
+<p><strong>删除本地分支</strong></p>
+<ul>
+<li><code>git branch -d &lt;branchName&gt;</code></li>
+</ul>
+<p><strong>删除远程分支</strong></p>
+<ul>
+<li><code>git push orign --delete &lt;branchName&gt;</code></li>
+</ul>
+<p><strong>本地关联远程分支</strong></p>
+<ul>
+<li><code>$ git push --set-upstream origin &lt;localBranchName&gt;</code></li>
+</ul>
+<h4 id="2-Switching-Branches"><a href="#2-Switching-Branches" class="headerlink" title="2. Switching Branches"></a>2. Switching Branches</h4><p>To switch to an existing branch, we run the <code>git checkout</code> command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout testing</span><br></pre></td></tr></table></figure>
+<p>This moves <code>HEAD</code> to point to the <code>testing</code> branch.</p>
+<ul>
+<li>ps.<code>HEAD</code> points to the <code>current branch</code></li>
+</ul>
+<p>这个时候我们已经切换到 testing 分支,如果此时我们修改文件并提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -am &apos;test branch&apos;</span><br></pre></td></tr></table></figure>
+<p>那么我们的 testing 分支向前移动了,但是 master 分支没有,它仍然指向原来的对象<br>我们切换回<code>master</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br></pre></td></tr></table></figure>
+<p>It moved the <code>HEAD pointer back to point to the master branch</code>, and it reverted the files in your working directory back to the snapshot that master points to.</p>
+<ul>
+<li>1.<code>HEAD</code>指回 master 分支, 2.工作目录恢复成 master 分支所指向的快照内容.</li>
+</ul>
+<h4 id="3-Divergent-history"><a href="#3-Divergent-history" class="headerlink" title="3. Divergent history"></a>3. Divergent history</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log --oneline --decorate --graph --all</span><br></pre></td></tr></table></figure>
+<p>it will print out the history of your commits, showing where your branch pointers are and how your history has diverged.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git log --oneline --decorate --graph --all</span><br><span class="line">* c2b9e (HEAD, master) made other changes</span><br><span class="line">| * 87ab2 (testing) made a change</span><br><span class="line">|/</span><br><span class="line">* f30ab add feature #32 - ability to add new formats to the</span><br><span class="line">* 34ac2 fixed bug #1328 - stack overflow under certain conditions</span><br><span class="line">* 98ca9 initial commit of my project</span><br></pre></td></tr></table></figure>
+<h2 id="3-Basic-Branching-and-Merging"><a href="#3-Basic-Branching-and-Merging" class="headerlink" title="3. Basic Branching and Merging"></a>3. Basic Branching and Merging</h2><h4 id="1-Basic-branching"><a href="#1-Basic-branching" class="headerlink" title="1. Basic branching"></a>1. Basic branching</h4><p>you can run the git checkout command with the <code>-b</code> switch:<br>相当于新建一个 iss53 分支, 并切换到分支上, <code>checkout</code> 检出到某个分支上(HEAD 指向它)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b iss53</span><br><span class="line"></span><br><span class="line">// This is shorthand for</span><br><span class="line">$ git branch iss53</span><br><span class="line">$ git checkout iss53</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>git branch</code>查看当前分支, 它会列出所有分支,当前分支前有一个<code>*</code>号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line">  *iss53</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
+<p>在分支中修改完后提交<code>git commit -am &#39;&#39;</code>,再切回主分支中合并 testing 分支<code>git merge testing</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VueFe@Thinkpad MINGW64 /d/Notes/Git (master)</span><br><span class="line">$ git merge testing</span><br><span class="line">Updating 4b8a874..de51520</span><br><span class="line">Fast-forward</span><br><span class="line"> 8-17 Git-Working with Remotes.md | 76 ++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> 1 file changed, 76 insertions(+)</span><br></pre></td></tr></table></figure>
+<p>-ps. <code>git merge --no-ff testing</code> 使用<code>--no-ff</code>,会在 master 分支上生成一个新的节点,保留分支的 commit 历史.</p>
+<p><img src="/img-md/WX20181018-101136.png" alt="image"></p>
+<p>when you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a “fast-forward.”</p>
+<p><img src="/img-md/WX20181018-101158.png" alt="image"></p>
+<p>当我们合并两个分支时,如果顺着一个分支走下去能够达到另一个分支,那么 git 在合并两者的时候,只会简单的将指针向前推进(指针右移) 这样的合并不会有冲突</p>
+<p><img src="/img-md/WX20181018-101217.png" alt="image"></p>
+<h4 id="2-Deleting-Branch"><a href="#2-Deleting-Branch" class="headerlink" title="2. Deleting Branch"></a>2. Deleting Branch</h4><p>删除分支<code>git branch -d testing</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d hotfix</span><br></pre></td></tr></table></figure>
+<p>之后我们切回#53 继续修改,并准备合并 iss53 到 master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">Switched to branch &apos;master&apos;</span><br><span class="line">$ git merge iss53</span><br><span class="line">Merge made by the &apos;recursive&apos; strategy.</span><br><span class="line">index.html |    1 +</span><br><span class="line">1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+<p><img src="/img-md/WX20181018-101250.png" alt="image"></p>
+<p>In this case,<code>master</code>分支所在的提交并不是<code>iss53</code>分支所在提交的直接祖先.Git 会使用两个分支的末端所指的快照<code>C4</code>和<code>C5</code>以及两个分支的 Common Ancestor <code>C2</code>,do a simple three-way merge</p>
+<p><img src="/img-md/WX20181018-101329.png" alt="image"></p>
+<p>Instead of just moving the branch pointer forward, Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a merge commit, and is special in that it has more than one parent.<br>三方合并的与之前的 fast-forward 不同之处在于它(c6)不止有一个父提交(c4,c5)</p>
+<p>合并完后我们可以删掉<code>iss53</code>分支了<code>git branch -d iss53</code></p>
+<h4 id="3-Basic-Merge-Conflicts"><a href="#3-Basic-Merge-Conflicts" class="headerlink" title="3. Basic Merge Conflicts"></a>3. Basic Merge Conflicts</h4><p>If you changed the same part of the same file differently in the two branches you’re merging together, Git won’t be able to merge them cleanly.<br>当我们在不同分支中对同一个文件的同一个部分进行了不同的修改,并试图合并两个分支的时候,就会产生冲突<code>merge conflict</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git merge iss53</span><br><span class="line">Auto-merging index.html</span><br><span class="line">CONFLICT (content): Merge conflict in index.html</span><br><span class="line">Automatic merge failed; fix conflicts and then commit the result.</span><br></pre></td></tr></table></figure>
+<p>At this point,git hasn’t automatically created a new merge commit.It has paused the process while you resolve the conflict.If you want to see which files are unmerged at any point after a merge conflict, you can run <code>git status</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">You have unmerged paths.</span><br><span class="line">  (fix conflicts and run <span class="string">"git commit"</span>)</span><br><span class="line"></span><br><span class="line">Unmerged paths:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to mark resolution)</span><br><span class="line"></span><br><span class="line">    both modified:      index.html</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</span><br></pre></td></tr></table></figure>
+<p>Git adds standard conflict-resolution markers to the files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html</span><br><span class="line">&lt;div id=&quot;footer&quot;&gt;contact : email.support@github.com&lt;/div&gt;</span><br><span class="line">=======</span><br><span class="line">&lt;div id=&quot;footer&quot;&gt;</span><br><span class="line"> please contact us at support@github.com</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html</span><br></pre></td></tr></table></figure>
+<p><code>HEAD</code>指示的版本 version(master 分支所在位置,因为当我们运行 merge 命令时已经检出到这个分支)在<code>=======</code>区域上半部分,<code>iss53</code>所指示的版本在<code>=======</code>下半部分,In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.</p>
+<p>解决完冲突后,我们对每个文件使用<code>git add</code>来标记冲突已解决.</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/10/18/git初始化/" data-toggle="tooltip" data-placement="top"
+                            title="Git初始化">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+            <!-- Side Catalog Container -->
+            
+
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;
+                    Zxd&#39;s Blog
+                    2018
+                    <br>
+                    <!-- Powered by <a href="https://onezx.github.io">Zxd</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+                        height="20px" src="https://ghbtns.com/github-btn.html?user=OneZx&repo=OneZx.github.io&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if ($('#tag_cloud').length !== 0) {
+        async("https://onezx.github.io/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: { start: '#bbbbee', end: '#0085a1' },
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<!-- cdn换过了 -->
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+    <!-- Image to hack wechat -->
+    <!-- <img src="https://onezx.github.io/img/icon_wechat.jpeg" width="0" height="0" /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

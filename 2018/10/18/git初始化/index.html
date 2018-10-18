@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <title>
+        
+        Git初始化 - Every step counts | Zxd&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://onezx.github.io/2018/10/18/git初始化/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Zxd&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">archive</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Git" title="Git">
+                            Git</a>
+                        
+                    </div>
+                    <h1>
+                        Git初始化
+                    </h1>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        October 18, 2018
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p>Git 是一个开源的分布式版本控制系统(Distributed Version Control System,DVCS),用于敏捷高效地处理任何或小或大的项目</p>
+<p>Git 的下载 : ==&gt; <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git-scm-downloads</a></p>
+<p>Installing Git ==&gt; <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener">Installing-Git</a></p>
+<h3 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h3><blockquote>
+<p>git 有三种状态</p>
+</blockquote>
+<ul>
+<li><code>已提交(committed)</code> 表示数据已经安全的保存在本地数据库中</li>
+<li><code>已修改(modified)</code> 表示修改了文件,但还没保存到数据库中</li>
+<li><code>已暂存(staged)</code> 表示对一个已修改文件的当前版本做了标记,使之包含在下次提交的快照中</li>
+</ul>
+<blockquote>
+<p>git 项目的三个工作区域</p>
+</blockquote>
+<ul>
+<li><code>git 仓库 .git directory(Repository)</code> 是 Git 用来保存项目的元数据和对象数据库的地方, clone 的时候就是 copy 这里的数据.</li>
+<li><code>工作目录 Working Directory</code> 是对项目某个版本独立提取(pull)出来的内容</li>
+<li><code>暂存区域 Staging Area</code> 是一个文件,保存了下次将提交的文件列表信息,一般在 git 仓库目录中.</li>
+</ul>
+<blockquote>
+<p>基本的 Git 工作流程</p>
+</blockquote>
+<ol>
+<li>在工作目录中修改文件</li>
+<li>暂存文件,将文件的快照放入暂存区域</li>
+<li>提交更新,找到暂存区域的文件,将快照(snapshot)永久性存储到 Git 仓库目录中</li>
+</ol>
+<blockquote>
+<p>命令行</p>
+</blockquote>
+<ul>
+<li>Mac ==&gt; 终端(Terminal)</li>
+<li>Windows ==&gt; 命令窗口(Command Prompt) or PowerShell</li>
+</ul>
+<h3 id="初次运行-git-前的配置"><a href="#初次运行-git-前的配置" class="headerlink" title="初次运行 git 前的配置"></a>初次运行 git 前的配置</h3><p><strong>用户信息</strong><br>当安装完 Git 应该做的第一件事就是设置用户名和邮件地址.每次 git 提交都会使用这些信息.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>git config</code>中如果使用了<code>--global</code> ,本机的所有 git 仓库都会使用该配置.</li>
+</ul>
+<p><strong>检查配置信息</strong></p>
+<ul>
+<li><code>git config --list</code>列出所有 Git 当前配置</li>
+<li><code>git config &lt;key&gt;</code> 检查 Git 的某一项配置 如<code>git conifg user.name</code></li>
+</ul>
+<p><strong>获取帮助</strong><br>git 手册随 git 一起安装在本地, 全英文 … English English English</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git help &lt;verb&gt;</span><br><span class="line">$ git &lt;verb&gt; --help</span><br><span class="line">$ man git-&lt;verb&gt;</span><br><span class="line">// 获取config命令的手册</span><br><span class="line">// git help config</span><br></pre></td></tr></table></figure>
+<h2 id="1-Getting-a-Git-Repository"><a href="#1-Getting-a-Git-Repository" class="headerlink" title="1.Getting a Git Repository"></a>1.Getting a Git Repository</h2><p>有两种获取 Git 项目仓库(Git Repository)的方法:</p>
+<ol>
+<li>You can take a local directory that is currently not under version control, and turn it into a Git repository, or</li>
+<li>You can clone an existing Git repository from elsewhere.</li>
+</ol>
+<h4 id="1-1-Initializing-a-Repository-in-an-Existing-Directory"><a href="#1-1-Initializing-a-Repository-in-an-Existing-Directory" class="headerlink" title="1.1 Initializing a Repository in an Existing Directory"></a>1.1 Initializing a Repository in an Existing Directory</h4><p>If you have a project directory that is currently not under version control and you want to start controlling it with Git, you first need to go to that project’s directory.</p>
+<ol>
+<li>cd 到现有项目目录下 <code>cd MyProject</code></li>
+<li><code>git init</code> 该命令创建一个名为<code>.git</code>的子目录</li>
+</ol>
+<p><code>git init</code> : This creates a new subdirectory named <code>.git</code> that contains all of your necessary repository files — a Git repository skeleton. At this point, nothing in your project is tracked yet.<br>在这个时候，我们仅仅是做了一个初始化的操作，项目里的文件还没有被跟踪</p>
+<p>如果我们想要对 existing files 做 version-controlling, we should probably begin tracking those files and do an initial commit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add *.c</span><br><span class="line">$ git add LICENSE</span><br><span class="line">$ git commit -m &apos;initial project version&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-Cloning-an-Existing-Repository"><a href="#1-2-Cloning-an-Existing-Repository" class="headerlink" title="1.2 Cloning an Existing Repository"></a>1.2 Cloning an Existing Repository</h4><p>If you want to get a copy of an existing Git repository — for example, a project you’d like to contribute to — the command you need is <code>git clone</code>.<br>当执行<code>git clone</code>命令的时候,默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取(pull)下来</p>
+<p>clone repository 的命令是<code>git clone [url]</code>, 比如, 要克隆 libgit2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/libgit2/libgit2</span><br></pre></td></tr></table></figure>
+<p>会在当前目录下创建一个名为<code>libgit2</code>的目录,从远程仓库拉取下所有数据放入这个目录中,并在这个目录下初始化一个<code>.git</code>文件夹</p>
+<ul>
+<li>在 clone 远程仓库时,自定义本地仓库名字</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/libgit2/libgit2 mylibgit</span><br><span class="line">// 本地仓库名字变为mylibgit</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps.在 Windows 中使用 Linux 命令 ==&gt; git bash , git bash 中 Vim 退回 <code>:q</code></p>
+</blockquote>
+<h2 id="2-Recording-Changes-to-the-Repository"><a href="#2-Recording-Changes-to-the-Repository" class="headerlink" title="2. Recording Changes to the Repository"></a>2. Recording Changes to the Repository</h2><p>Remember that each file in your working directory can be in one of two states: <code>tracked</code> or <code>untracked</code>. Tracked files are files that were in the last snapshot; they can be unmodified, modified, or staged. In short, tracked files are files that Git knows about.</p>
+<p>Untracked files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because Git just checked them out and you haven’t edited anything.</p>
+<p><img src="/img-md/WX20181018-100355.png" alt="image"></p>
+<ul>
+<li>The lifecycle of the status of your files</li>
+</ul>
+<h4 id="2-1-Checking-the-Status-of-Files"><a href="#2-1-Checking-the-Status-of-Files" class="headerlink" title="2.1 Checking the Status of Files"></a>2.1 Checking the Status of Files</h4><p>The main tool you use to determine which files are in which state is the <code>git status</code> command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with &apos;origin/master&apos;.</span><br><span class="line"></span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
+<p>This means you have a clean working directory — in other words, none of your tracked files are modified.</p>
+<p>if we add a new file to our project, a simple <code>README.md</code> file. If the file didn’t exist before, and we run <code>git status</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with &apos;origin/master&apos;.</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span><br><span class="line"></span><br><span class="line">        README.md</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span><br></pre></td></tr></table></figure>
+<p><code>Untracked files:</code>新建的文件出现在<code>Untracked files</code>下面,未跟踪都文件意味着 Git 在之前都快照(提交)中没有这些文件,<br>git 不会自动将新建文件纳入跟踪范围, 我们使用<code>git add &lt;file&gt;</code>来跟踪某个文件</p>
+<h4 id="2-2-Tracking-New-Files"><a href="#2-2-Tracking-New-Files" class="headerlink" title="2.2 Tracking New Files"></a>2.2 Tracking New Files</h4><p>To begin tracking the README file, you can run this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add README</span><br><span class="line">// git add .  `.`表示将所有修改都放入暂存区</span><br></pre></td></tr></table></figure>
+<p>run <code>git status</code> command again</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with &apos;origin/master&apos;.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   README.md  // 字体绿色 表示已暂存</span><br></pre></td></tr></table></figure>
+<p><code>Changes to be committed:</code> 在这行下面都文件表示是已暂存状态.如果现在提交,name 该文件此时此刻的版本将被保留在历史记录中.</p>
+<h4 id="2-3-Staging-Modified-Files"><a href="#2-3-Staging-Modified-Files" class="headerlink" title="2.3 Staging Modified Files"></a>2.3 Staging Modified Files</h4><p>如果我们修改一个已被跟踪都文件<code>CONTRIBUTING.md</code>.然后运行<code>git status</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with &apos;origin/master&apos;.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   README.md</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   CONTRIBUTING.md</span><br></pre></td></tr></table></figure>
+<p><code>Changes not staged for commit</code>: 表示已跟踪文件内容发生了变化,还没有放到暂存区.要暂存这次更新,需要运行<code>git add</code></p>
+<ul>
+<li><code>git add</code> : 1. 可以用它开始跟踪新文件 2. 把已跟踪都文件放到暂存区 3.用于合并时把有冲突的文件标记为已解决状态等; 注意:add 成功后是不给提示的,会换行进入下一个输入</li>
+<li>可以理解<code>git add</code> 为 <code>将该内容添加到下一次提交中</code>而不是<code>将一个文件添加到项目中</code></li>
+<li><code>add precisely this content to the next commit</code> rather than <code>add this file to the project</code></li>
+</ul>
+<p>运行<code>git add CONTRIBUTING.md</code>将”CONTRIBUTING.md”放到暂存区,在看看<code>git status</code>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with &apos;origin/master&apos;.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   CONTRIBUTING.md</span><br><span class="line">        new file:   README.md</span><br></pre></td></tr></table></figure>
+<p>现在两个文件都已暂存,下次提交就会一并记录到仓库. 假设这时我们在<code>CONTRIBUTING.md</code>里再加条注释保存后,再运行<code>git status</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up to date with &apos;origin/master&apos;.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   CONTRIBUTING.md</span><br><span class="line">        new file:   README.md</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   CONTRIBUTING.md</span><br></pre></td></tr></table></figure>
+<p>这时<code>CONTRIBUTING.md</code>同时出现在暂存区和非暂存区,因为 git 只暂存了运行<code>git add</code>命令时都版本,如果现在提交，<code>CONTRIBUTING.md</code>的版本是最后一次运行 <code>git add</code> 命令时的那个版本，而不是运行 <code>git commit</code> 时，在工作目录中的当前版本.所以，<code>**运行了 git add 之后又作了修订的文件，需要重新运行 git add 把最新版本重新暂存起来**</code></p>
+<h4 id="2-4-Short-Status"><a href="#2-4-Short-Status" class="headerlink" title="2.4 Short Status"></a>2.4 Short Status</h4><p>当我们使用<code>git status -s</code>或<code>git status --short</code>,将得到一种更简洁的格式输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git status -s</span><br><span class="line">MM CONTRIBUTING.md</span><br><span class="line">// 靠左的一个M绿色 文件被修改并放入暂存区 已暂存的修改</span><br><span class="line">// 靠右的一个M红色 文件被修改了,还没放入暂存区</span><br><span class="line">A  README.md</span><br><span class="line">// A表示新添加到暂存区都文件</span><br></pre></td></tr></table></figure>
+<h4 id="2-5-Viewing-Your-Staged-and-Unstaged-Changes"><a href="#2-5-Viewing-Your-Staged-and-Unstaged-Changes" class="headerlink" title="2.5 Viewing Your Staged and Unstaged Changes"></a>2.5 Viewing Your Staged and Unstaged Changes</h4><p>查看已暂存和未暂存的修改,显示具体那些行发生了变化,可以用<code>git diff</code>命令</p>
+<ol>
+<li><p>当要查看尚未暂存的文件更新了哪些部分,不加参数直接输入<code>git diff</code></p>
+<ul>
+<li>该命令比较的是工作目录中当前文件和暂存区域快照之前的差异,也就是修改之后还没有暂存起来的变化差异</li>
+</ul>
+</li>
+<li><p>要查看已暂存的将要添加到下次提交里的内容,可以用<code>git diff --cached</code> 版本 1.6.1 或以上还可以用<code>git diff --staged</code></p>
+</li>
+</ol>
+<blockquote>
+<p>ps. <code>git diff</code> 本身只显示尚未暂存的改动，而不是自上次提交以来所做的所有改动。 所以有时候一下子暂存了所有更新过的文件后，运行 git diff 后却什么也没有，就是这个原因</p>
+</blockquote>
+<h4 id="2-6-Committing-Your-Changes"><a href="#2-6-Committing-Your-Changes" class="headerlink" title="2.6 Committing Your Changes"></a>2.6 Committing Your Changes</h4><p>当暂存区已经准备妥当就可以提交了,在提交前,一定要确认还有什么修改过的或新建的文件还没有<code>git add</code>过,否则提交的时候不会记录这些还没有暂存起来的变化.</p>
+<ul>
+<li>每次提交前,先<code>git status</code>查看下, 是不是所有修改的放入暂存区(<code>git add</code>),然后再运行提交命令<code>git commit -m &quot;commit message&quot;</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;git 提交测试&quot;</span><br><span class="line">[master 463dc4f] git 提交测试</span><br><span class="line"> 2 files changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 README.md</span><br></pre></td></tr></table></figure>
+<p>You can see that the commit has given you some output about itself: <code>1. which branch you committed to (master)</code>, <code>2. what SHA-1 checksum(SHA-1哈希校验和) the commit has (463dc4f)</code>, <code>3. how many files were changed</code>, <code>4. and statistics about lines added and removed in the commit</code>.</p>
+<p>每次<code>git commit -m &#39;&lt;msg&gt;&#39;</code>提交时记录的是放在暂存区的快照. 每次运行提交操作,都是对项目作一次快照,以后可以回到这个状态</p>
+<h4 id="2-7-Skipping-the-Staging-Area"><a href="#2-7-Skipping-the-Staging-Area" class="headerlink" title="2.7 Skipping the Staging Area"></a>2.7 Skipping the Staging Area</h4><p>跳过使用暂存区: 在提交的时候,使用<code>git commit -a -m &#39;&lt;msg&gt;&#39;</code>,git 就会自动把所有已经跟踪过渡文件暂存起来一并提交,从而跳过<code>git add</code>步骤</p>
+<h4 id="2-8-Removing-Files"><a href="#2-8-Removing-Files" class="headerlink" title="2.8 Removing Files"></a>2.8 Removing Files</h4><p>To remove a file from Git, you have to remove it from your <code>tracked files</code> (more accurately, remove it from your <code>staging area</code>) and then commit.要从 git 中移除某个文件,就必须从暂存区中移除,然后提交</p>
+<p>当我们在工作目录中手工删除某个文件,运行<code>git status</code>时就会在”Changes not staged for commit:”中看到<code>deleted:</code>,<br>然后再运行<code>git rm</code>记录此次移除文件的操作. 下次提交时,该文件就不再纳入版本管理了</p>
+<p>如果删除之前修改过并且已经放到暂存区(<code>git add</code>),则必须要用强制删除选项 <code>-f</code>(force)</p>
+<h2 id="3-0-Viewing-the-Commit-History"><a href="#3-0-Viewing-the-Commit-History" class="headerlink" title="3.0 Viewing the Commit History"></a>3.0 Viewing the Commit History</h2><blockquote>
+<p>查看历史提交 <code>git log</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git log</span><br><span class="line">commit ca82a6dff817ec66f44342007202690a93763949</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Mon Mar 17 21:52:11 2008 -0700</span><br><span class="line"></span><br><span class="line">    changed the version number</span><br><span class="line"></span><br><span class="line">commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Sat Mar 15 16:40:33 2008 -0700</span><br><span class="line"></span><br><span class="line">    removed unnecessary test</span><br><span class="line"></span><br><span class="line">commit a11bef06a3f659402fe7563abf99ad00de2209e6</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Sat Mar 15 10:31:28 2008 -0700</span><br><span class="line"></span><br><span class="line">    first commit  // 这里是message</span><br></pre></td></tr></table></figure>
+<p>默认不用任何参数时,<code>git log</code>会按提交时间列出所有的更新,它会列出每个提交的<code>SHA-1校验和</code> <code>Author</code> <code>email</code> <code>date</code> and <code>commit message</code></p>
+<p><code>-p</code>用来显示每次提交的内容差异,同时可以加上<code>-2</code>仅显示最近两次的提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log -p -2</span><br></pre></td></tr></table></figure>
+<p><code>--stat</code> 显示每次提交的统计信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log --stat</span><br></pre></td></tr></table></figure>
+<p><code>--pretty</code> 指定使用不用于默认格式的方式展示 有<code>oneline</code> <code>short</code> <code>full</code> <code>fuller</code> <code>--pretty=format:&quot;%h - %an&quot;</code>等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log --pretty=oneline</span><br></pre></td></tr></table></figure>
+<h4 id="Undoing-Things"><a href="#Undoing-Things" class="headerlink" title="Undoing Things"></a>Undoing Things</h4><p>当我们在一次提交<code>git commit -m &lt;msg&gt;</code>完后发现提交信息写错了,或者有漏掉文件没有<code>git add</code>,可以运行撤销操作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure>
+<p>当我们运行上面命令时,会出现 vim 编辑窗口,刚进入编辑器的时候,是 vim 的 normal 模式,按键盘<code>i a o</code>都可以进入 Vim 的 insert 模式进行编辑(<strong>编辑必须在 insert 模式中进行</strong>)</p>
+<p>git 中 vim 的常用几个命令,按 Esc 退出插入模式后,输入<code>:</code>,</p>
+<ul>
+<li><code>:w</code> 保存编辑后文件内容,不退出 vim 编辑器</li>
+<li><code>:wq</code> 保存并退出 vim</li>
+<li><p><code>:q</code> 退出 vim</p>
+</li>
+<li><p>ps.terminal 中切换到 d 盘 <code>cd /d</code>or <code>cd d:</code>,MinGW(Minimalist GNUfor Windows)</p>
+</li>
+<li>vsCode 中使用 git bash, VScode 首选项 User Settings 中设置</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"</span><br></pre></td></tr></table></figure>
+<p>执行<code>git commit --amend</code>,在 vim 中编辑完 message 后,<code>:wq</code>退出,我们<code>git status</code>查看,会发现只有一次提交记录,上一次的会被 overwrite 重写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &apos;initial commit&apos;</span><br><span class="line">$ git add forgotten_file</span><br><span class="line">$ git commit --amend</span><br><span class="line">// 两次提交最后log中只有一条</span><br><span class="line">// 前一条被覆盖,我们在这儿修改了提交的message</span><br></pre></td></tr></table></figure>
+<p>You end up with a single commit — the second commit replaces the results of the first.</p>
+<h4 id="Unstaging-a-Staged-File"><a href="#Unstaging-a-Staged-File" class="headerlink" title="Unstaging a Staged File"></a>Unstaging a Staged File</h4><p>当我们运行<code>git add .</code>or<code>git add *</code>暂存了两个(所有的)修改文件,但是我们原本想要将它们作为两次独立的修改提交,<br>那么取消暂存中的一个使用<code>git reset HEAD &#39;&lt;file&gt;&#39;</code>来取消暂存的某个文件</p>
+<h4 id="Unmodifying-a-Modified-File"><a href="#Unmodifying-a-Modified-File" class="headerlink" title="Unmodifying a Modified File"></a>Unmodifying a Modified File</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">    modified:   CONTRIBUTING.md</span><br></pre></td></tr></table></figure>
+<p>如果我们不想保留对某个文件的修改(<strong>文件未放入暂存区才可以使用</strong>),想要将它还原成上次提交时的样子(或者刚把它放入工作区的样子)</p>
+<ul>
+<li><code>git checkout --&#39;&lt;filename&gt;&#39;</code> 注意加上文件后缀名<code>.md or .js</code>等</li>
+</ul>
+<p>执行完后,我们可以看见后来做出的修改被原来提交的版本替换了,注意:我们在<code>git commit</code>后所做的所有修改的都会消失</p>
+<p>如果我们仍向保留对那个文件做出的修改,但现在又需要撤销,我们可以新建一个<code>branch</code>分支来保存进度.</p>
+<p><strong>Git 回滚到某个 commit</strong><br>注意使用–hard 不可逆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD^         回退到上个版本</span><br><span class="line">$ git reset --hard HEAD~3        回退到前3次提交之前，以此类推，回退到n次提交之前</span><br><span class="line">$ git reset --hard commit_id     退到/进到 指定commit的sha码</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps. <code>git commit -a -m</code>===<code>git commit -am</code></p>
+</blockquote>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">阮一峰-常用 Git 命令清单</a></li>
+</ul>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/10/18/git-Merge-Branch/" data-toggle="tooltip" data-placement="top"
+                            title="Git Merge Branch">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/10/17/2018-10-17-Node在云服务器上的部署/" data-toggle="tooltip" data-placement="top"
+                            title="Node在云服务器上的部署">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+            <!-- Side Catalog Container -->
+            
+
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;
+                    Zxd&#39;s Blog
+                    2018
+                    <br>
+                    <!-- Powered by <a href="https://onezx.github.io">Zxd</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+                        height="20px" src="https://ghbtns.com/github-btn.html?user=OneZx&repo=OneZx.github.io&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if ($('#tag_cloud').length !== 0) {
+        async("https://onezx.github.io/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: { start: '#bbbbee', end: '#0085a1' },
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<!-- cdn换过了 -->
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+    <!-- Image to hack wechat -->
+    <!-- <img src="https://onezx.github.io/img/icon_wechat.jpeg" width="0" height="0" /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
