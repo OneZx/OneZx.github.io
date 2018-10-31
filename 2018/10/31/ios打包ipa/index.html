@@ -87,6 +87,13 @@
 
                         
                         <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">archive</a>
                         </li>
                         
@@ -95,13 +102,6 @@
                         
                         <li>
                             <a href="/tags/">tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -194,30 +194,30 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>最近在做ios打包时遇到了很多坑, app是ts写的, 并不是swift或者Ob-c, 毕竟不是专业的ios开发, 也没有用过Xcode打过包, 然后各种踩坑. 这里记录总结一下.</p>
-<h3 id="1-Apple-developer账号"><a href="#1-Apple-developer账号" class="headerlink" title="1.Apple developer账号"></a>1.Apple developer账号</h3><p>首先得用apple ID注册一个开发者账号, 个人和公司账号都是99美元一年, 注册步骤网上很多文章, 可以搜一下, 这里贴上注册等地址</p>
+                <p>最近在做ios打包时遇到了很多坑，app是ts写的，并不是swift或者Ob-c，毕竟不是专业的ios开发，也没有用过Xcode打过包，然后各种踩坑，这里记录总结一下。</p>
+<h3 id="1-Apple-developer账号"><a href="#1-Apple-developer账号" class="headerlink" title="1.Apple developer账号"></a>1.Apple developer账号</h3><p>首先得用apple ID注册一个开发者账号，个人和公司账号都是99美元一年，注册步骤网上很多文章，可以搜一下，这里贴上注册等地址</p>
 <ul>
 <li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener">apple developer</a></li>
 <li><a href="https://developer.apple.com/account/" target="_blank" rel="noopener">apple account</a></li>
-<li>ps.注册账号会有一段审核时间, 个人账号需要上传身份证等, 如果一直没有通过审核, 可以给客服打电话咨询一下, 审核速度会快很多.</li>
+<li>ps.注册账号会有一段审核时间，个人账号需要上传身份证等，如果一直没有通过审核, 可以给客服打电话咨询一下，审核速度会快很多哈。</li>
 </ul>
-<h4 id="1-11-iOS-Certificates-登录后选择进入"><a href="#1-11-iOS-Certificates-登录后选择进入" class="headerlink" title="1.11 iOS Certificates 登录后选择进入"></a>1.11 iOS Certificates 登录后选择进入</h4><p><img src="/2018/10/31/ios打包ipa/WX20181024-164840.png" alt="certificates"><br><img src="/2018/10/31/ios打包ipa/WX20181031-162609.png" alt="imgs"></p>
+<h5 id="1-11-iOS-Certificates-登录后选择进入"><a href="#1-11-iOS-Certificates-登录后选择进入" class="headerlink" title="1.11 iOS Certificates 登录后选择进入"></a>1.11 iOS Certificates 登录后选择进入</h5><p><img src="/2018/10/31/ios打包ipa/WX20181024-164840.png" alt="certificates"><br><img src="/2018/10/31/ios打包ipa/WX20181031-162609.png" alt="imgs"></p>
 <ul>
 <li>ios Certificates分为两种类型<ul>
 <li>development Certificate(开发证书)</li>
 <li>production Certificate(发布证书)</li>
 </ul>
 </li>
-<li>证书: 证明证书拥有者拥有证书上所说的能力. 一个证书涉及到颁发者, 拥有者, 证明拥有者拥有什么能力.<ul>
+<li>证书: 证明证书拥有者拥有证书上所说的能力。一个证书涉及到颁发者、拥有者、证明拥有者拥有什么能力。<ul>
 <li>颁发者: 自己</li>
 <li>拥有者: 安装证书的电脑</li>
 <li>证明能力: 此电脑可以安装或者打包某应用程序</li>
 </ul>
 </li>
 </ul>
-<h4 id="1-12-添加证书"><a href="#1-12-添加证书" class="headerlink" title="1.12 添加证书"></a>1.12 添加证书</h4><p><img src="/2018/10/31/ios打包ipa/WX20181031-165921.png" alt="img"><br>这里我们主要选择iOS App Development或者App Store and Ad Hoc这两类, development证书适用于真机调试, 而当我们需要打包成ipa给测试人员测试安装App时, 就需要选择 Ad Hoc这一项目.</p>
-<h4 id="1-13-创建CSR文件-Certificate-Signing-Request"><a href="#1-13-创建CSR文件-Certificate-Signing-Request" class="headerlink" title="1.13 创建CSR文件 (Certificate Signing Request)"></a>1.13 创建CSR文件 (Certificate Signing Request)</h4><p><img src="/2018/10/31/ios打包ipa/WX20181031-170857.png" alt="img"></p>
-<h4 id="1-13-证书在Xcode工程中的位置"><a href="#1-13-证书在Xcode工程中的位置" class="headerlink" title="1.13 证书在Xcode工程中的位置"></a>1.13 证书在Xcode工程中的位置</h4><p><img src="/2018/10/31/ios打包ipa/WX20181031-165001.png" alt="img"><br>这里我们选择了Automatically manage signing, 自动管理证书</p>
+<h5 id="1-12-添加证书"><a href="#1-12-添加证书" class="headerlink" title="1.12 添加证书"></a>1.12 添加证书</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-165921.png" alt="img"><br>这里我们主要选择ios App Development或者App Store and Ad Hoc这两类。development证书适用于真机调试，而当我们需要打包成ipa给测试人员测试安装App时，就需要选择 Ad Hoc这一项。</p>
+<h5 id="1-13-创建CSR文件-Certificate-Signing-Request"><a href="#1-13-创建CSR文件-Certificate-Signing-Request" class="headerlink" title="1.13 创建CSR文件 (Certificate Signing Request)"></a>1.13 创建CSR文件 (Certificate Signing Request)</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-170857.png" alt="img"></p>
+<h5 id="1-14-证书在Xcode工程中的位置"><a href="#1-14-证书在Xcode工程中的位置" class="headerlink" title="1.14 证书在Xcode工程中的位置"></a>1.14 证书在Xcode工程中的位置</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-165001.png" alt="img"><br>这里我们选择了Automatically manage signing, 自动管理证书</p>
 <h3 id="Xcode删除证书文件-Xcode-10"><a href="#Xcode删除证书文件-Xcode-10" class="headerlink" title="Xcode删除证书文件 (Xcode 10)"></a>Xcode删除证书文件 (Xcode 10)</h3><blockquote>
 <p>control+空格 , 粘贴下面路径, 回车后删除里面文件夹</p>
 </blockquote>

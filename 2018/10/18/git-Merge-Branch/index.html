@@ -87,6 +87,13 @@
 
                         
                         <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">archive</a>
                         </li>
                         
@@ -95,13 +102,6 @@
                         
                         <li>
                             <a href="/tags/">tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -279,18 +279,18 @@
 <p>在分支中修改完后提交<code>git commit -am &#39;&#39;</code>,再切回主分支中合并 testing 分支<code>git merge testing</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VueFe@Thinkpad MINGW64 /d/Notes/Git (master)</span><br><span class="line">$ git merge testing</span><br><span class="line">Updating 4b8a874..de51520</span><br><span class="line">Fast-forward</span><br><span class="line"> 8-17 Git-Working with Remotes.md | 76 ++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> 1 file changed, 76 insertions(+)</span><br></pre></td></tr></table></figure>
 <p>-ps. <code>git merge --no-ff testing</code> 使用<code>--no-ff</code>,会在 master 分支上生成一个新的节点,保留分支的 commit 历史.</p>
-<p><img src="/img-md/WX20181018-101136.png" alt="image"></p>
+<p><img src="/2018/10/18/git-Merge-Branch/img-md/WX20181018-101136.png" alt="image"></p>
 <p>when you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a “fast-forward.”</p>
-<p><img src="/img-md/WX20181018-101158.png" alt="image"></p>
+<p><img src="/2018/10/18/git-Merge-Branch/img-md/WX20181018-101158.png" alt="image"></p>
 <p>当我们合并两个分支时,如果顺着一个分支走下去能够达到另一个分支,那么 git 在合并两者的时候,只会简单的将指针向前推进(指针右移) 这样的合并不会有冲突</p>
-<p><img src="/img-md/WX20181018-101217.png" alt="image"></p>
+<p><img src="/2018/10/18/git-Merge-Branch/img-md/WX20181018-101217.png" alt="image"></p>
 <h4 id="2-Deleting-Branch"><a href="#2-Deleting-Branch" class="headerlink" title="2. Deleting Branch"></a>2. Deleting Branch</h4><p>删除分支<code>git branch -d testing</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d hotfix</span><br></pre></td></tr></table></figure>
 <p>之后我们切回#53 继续修改,并准备合并 iss53 到 master</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">Switched to branch &apos;master&apos;</span><br><span class="line">$ git merge iss53</span><br><span class="line">Merge made by the &apos;recursive&apos; strategy.</span><br><span class="line">index.html |    1 +</span><br><span class="line">1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
-<p><img src="/img-md/WX20181018-101250.png" alt="image"></p>
+<p><img src="/2018/10/18/git-Merge-Branch/img-md/WX20181018-101250.png" alt="image"></p>
 <p>In this case,<code>master</code>分支所在的提交并不是<code>iss53</code>分支所在提交的直接祖先.Git 会使用两个分支的末端所指的快照<code>C4</code>和<code>C5</code>以及两个分支的 Common Ancestor <code>C2</code>,do a simple three-way merge</p>
-<p><img src="/img-md/WX20181018-101329.png" alt="image"></p>
+<p><img src="/2018/10/18/git-Merge-Branch/img-md/WX20181018-101329.png" alt="image"></p>
 <p>Instead of just moving the branch pointer forward, Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a merge commit, and is special in that it has more than one parent.<br>三方合并的与之前的 fast-forward 不同之处在于它(c6)不止有一个父提交(c4,c5)</p>
 <p>合并完后我们可以删掉<code>iss53</code>分支了<code>git branch -d iss53</code></p>
 <h4 id="3-Basic-Merge-Conflicts"><a href="#3-Basic-Merge-Conflicts" class="headerlink" title="3. Basic Merge Conflicts"></a>3. Basic Merge Conflicts</h4><p>If you changed the same part of the same file differently in the two branches you’re merging together, Git won’t be able to merge them cleanly.<br>当我们在不同分支中对同一个文件的同一个部分进行了不同的修改,并试图合并两个分支的时候,就会产生冲突<code>merge conflict</code></p>
