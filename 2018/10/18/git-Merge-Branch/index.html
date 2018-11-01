@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/archive/">archive</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">archive</a>
+                            <a href="/tags/">tags</a>
                         </li>
                         
                     
@@ -279,7 +279,7 @@
 <p>在分支中修改完后提交<code>git commit -am &#39;&#39;</code>,再切回主分支中合并 testing 分支<code>git merge testing</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VueFe@Thinkpad MINGW64 /d/Notes/Git (master)</span><br><span class="line">$ git merge testing</span><br><span class="line">Updating 4b8a874..de51520</span><br><span class="line">Fast-forward</span><br><span class="line"> 8-17 Git-Working with Remotes.md | 76 ++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> 1 file changed, 76 insertions(+)</span><br></pre></td></tr></table></figure>
 <p>-ps. <code>git merge --no-ff testing</code> 使用<code>--no-ff</code>,会在 master 分支上生成一个新的节点,保留分支的 commit 历史.</p>
-<p><img src="/2018/10/18/git-Merge-Branch/img-md/WX20181018-101136.png" alt="image"></p>
+<p><img src="/2018/10/18/git-Merge-Branch/WX20181018-101136.png" alt="image"></p>
 <p>when you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together — this is called a “fast-forward.”</p>
 <p><img src="/2018/10/18/git-Merge-Branch/WX20181018-101158.png" alt="image"></p>
 <p>当我们合并两个分支时,如果顺着一个分支走下去能够达到另一个分支,那么 git 在合并两者的时候,只会简单的将指针向前推进(指针右移) 这样的合并不会有冲突</p>
