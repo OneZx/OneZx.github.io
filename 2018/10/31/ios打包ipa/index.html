@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/archive/">archive</a>
+                            <a href="/tags/">tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/archive/">archive</a>
                         </li>
                         
                     
@@ -195,13 +195,13 @@
                 post-container">
 
                 <p>最近在做ios打包时遇到了很多坑，app是ts写的，并不是swift或者Ob-c，毕竟不是专业的ios开发，也没有用过Xcode打过包，然后各种踩坑，这里记录总结一下。</p>
-<h3 id="1-Apple-developer账号"><a href="#1-Apple-developer账号" class="headerlink" title="1.Apple developer账号"></a>1.Apple developer账号</h3><p>首先得用apple ID注册一个开发者账号，个人和公司账号都是99美元一年，注册步骤网上很多文章，可以搜一下，这里贴上注册等地址</p>
+<h4 id="1-Apple-developer账号"><a href="#1-Apple-developer账号" class="headerlink" title="1. Apple developer账号"></a>1. Apple developer账号</h4><p>首先得用apple ID注册一个开发者账号，个人和公司账号都是99美元一年，注册步骤网上很多文章，可以搜一下，这里贴上注册等地址</p>
 <ul>
 <li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener">apple developer</a></li>
 <li><a href="https://developer.apple.com/account/" target="_blank" rel="noopener">apple account</a></li>
 <li>ps.注册账号会有一段审核时间，个人账号需要上传身份证等，如果一直没有通过审核, 可以给客服打电话咨询一下，审核速度会快很多哈。</li>
 </ul>
-<h5 id="1-11-iOS-Certificates-登录后选择进入"><a href="#1-11-iOS-Certificates-登录后选择进入" class="headerlink" title="1.11 iOS Certificates 登录后选择进入"></a>1.11 iOS Certificates 登录后选择进入</h5><p><img src="/2018/10/31/ios打包ipa/WX20181024-164840.png" alt="certificates"><br><img src="/2018/10/31/ios打包ipa/WX20181031-162609.png" alt="imgs"></p>
+<h4 id="1-1-iOS-Certificates"><a href="#1-1-iOS-Certificates" class="headerlink" title="1.1 iOS Certificates"></a>1.1 iOS Certificates</h4><p><img src="/2018/10/31/ios打包ipa/WX20181024-164840.png" alt="certificates"><br><img src="/2018/10/31/ios打包ipa/WX20181031-162609.png" alt="imgs"></p>
 <ul>
 <li>ios Certificates分为两种类型<ul>
 <li>development Certificate(开发证书)</li>
@@ -215,9 +215,62 @@
 </ul>
 </li>
 </ul>
-<h5 id="1-12-添加证书"><a href="#1-12-添加证书" class="headerlink" title="1.12 添加证书"></a>1.12 添加证书</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-165921.png" alt="img"><br>这里我们主要选择ios App Development或者App Store and Ad Hoc这两类。development证书适用于真机调试，而当我们需要打包成ipa给测试人员测试安装App时，就需要选择 Ad Hoc这一项。</p>
-<h5 id="1-13-创建CSR文件-Certificate-Signing-Request"><a href="#1-13-创建CSR文件-Certificate-Signing-Request" class="headerlink" title="1.13 创建CSR文件 (Certificate Signing Request)"></a>1.13 创建CSR文件 (Certificate Signing Request)</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-170857.png" alt="img"></p>
-<h5 id="1-14-证书在Xcode工程中的位置"><a href="#1-14-证书在Xcode工程中的位置" class="headerlink" title="1.14 证书在Xcode工程中的位置"></a>1.14 证书在Xcode工程中的位置</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-165001.png" alt="img"><br>这里我们选择了Automatically manage signing, 自动管理证书</p>
+<h5 id="1-11-添加证书"><a href="#1-11-添加证书" class="headerlink" title="1.11 添加证书"></a>1.11 添加证书</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-165921.png" alt="img"><br>这里我们主要选择ios App Development或者App Store and Ad Hoc这两类。<code>development证书适用于真机调试</code>，而当我们需要<code>打包成ipa给测试人员测试安装App时</code>，就需要选择 <code>Ad Hoc</code>这一项。最后创建证书的时候需要一个CSR文件，下面我们来看怎么创建CSR。</p>
+<h5 id="1-12-创建CSR文件-Certificate-Signing-Request"><a href="#1-12-创建CSR文件-Certificate-Signing-Request" class="headerlink" title="1.12 创建CSR文件 (Certificate Signing Request)"></a>1.12 创建CSR文件 (Certificate Signing Request)</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-170857.png" alt="img"></p>
+<ul>
+<li>在Mac的<code>应用程序</code>中找到并打开<code>钥匙串访问工具(keyAccess)</code>，选择<code>从证书颁发机构请求证书</code></li>
+</ul>
+<p><img src="/2018/10/31/ios打包ipa/WX20181101-110955.png" alt="img"></p>
+<ul>
+<li>这里输入一个邮箱，常用名称默认就行，CA电子邮箱可以不用填写，注意选择<code>存储到磁盘</code>。之后注意保存的位置，在创建证书的时候选择这个文件。</li>
+</ul>
+<p><img src="/2018/10/31/ios打包ipa/屏幕快照 2018-11-01 上午11.12.45.png" alt="img"></p>
+<h5 id="1-13-证书在Xcode工程中的位置"><a href="#1-13-证书在Xcode工程中的位置" class="headerlink" title="1.13 证书在Xcode工程中的位置"></a>1.13 证书在Xcode工程中的位置</h5><p><img src="/2018/10/31/ios打包ipa/WX20181031-165001.png" alt="img"></p>
+<ul>
+<li>ps.这里我们选择了Automatically manage signing, 自动管理证书</li>
+</ul>
+<h4 id="1-2-App-IDs"><a href="#1-2-App-IDs" class="headerlink" title="1.2 App IDs"></a>1.2 App IDs</h4><p><img src="/2018/10/31/ios打包ipa/WX20181101-114108.png" alt="img"><br><img src="/2018/10/31/ios打包ipa/WX20181101-114336.png" alt="img"></p>
+<blockquote>
+<p>App ID</p>
+</blockquote>
+<ul>
+<li>App ID就是一个App的身份证, 一个App的唯一标志，在project中叫做Bundle ID，Xcode中<code>Bundle Identifier</code>中填写这一唯一标志。</li>
+<li><code>Bundle ID</code>字符串最好保持reverse-DNS的格式，例如，app名字叫hello，公司的域名是github.com，那么bundle id就可以写 <code>com.github.hello</code> ，Bundle ID是大小写敏感的。</li>
+<li>ps.上图中<code>XC Wildcard</code> 表示的是选择自动管理证书时,自动创建的app名字, ID是一个<code>*</code>通配符</li>
+</ul>
+<h5 id="1-21-添加App-ID"><a href="#1-21-添加App-ID" class="headerlink" title="1.21 添加App ID"></a>1.21 添加App ID</h5><p><img src="/2018/10/31/ios打包ipa/WX20181101-155409.png" alt="img"></p>
+<ul>
+<li>App ID Description(ID描述)<ul>
+<li>也就是给这个app取个名字</li>
+</ul>
+</li>
+<li>App ID Prefix(ID前缀)<ul>
+<li>这里苹果为了更精确的表示APP ID的唯一性，使用了开发者账号的<code>Team ID</code>作为App ID的前缀。</li>
+</ul>
+</li>
+<li>App ID Suffix(ID后缀)<ul>
+<li><code>Explicit App ID</code> (精确的ID)   我们大多数都是填写这一项, 直接填写<code>Bundle ID</code></li>
+<li>Wildcard App ID (通用的ID) </li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-Devices"><a href="#1-3-Devices" class="headerlink" title="1.3 Devices"></a>1.3 Devices</h4><p><img src="/2018/10/31/ios打包ipa/WX20181101-160730.png" alt="img"><br>Devices就是我们用来测试的设备，iphone，pad等。我们需要获得待测试iphone或pad的<code>udid</code>。</p>
+<blockquote>
+<p>UDID </p>
+</blockquote>
+<ul>
+<li>udid是ios设配的唯一识别码, 就像我们的身份证一样. 我们可以用Itunes连接iphone获取它的udid, 另外还有很多其他方式.</li>
+<li>ps.每个开发者账号最多添加<code>100</code>台测试设备</li>
+</ul>
+<h5 id="1-31-使用itunes获取iphone的udid"><a href="#1-31-使用itunes获取iphone的udid" class="headerlink" title="1.31 使用itunes获取iphone的udid"></a>1.31 使用itunes获取iphone的udid</h5><p><img src="/2018/10/31/ios打包ipa/WX20181101-162530.png" alt="img"></p>
+<ul>
+<li>这里如果不是显示的<code>UDID</code>, 鼠标点击会切换, 多点几下就是了</li>
+</ul>
+<h5 id="1-32-使用蒲公英获取"><a href="#1-32-使用蒲公英获取" class="headerlink" title="1.32 使用蒲公英获取"></a>1.32 使用蒲公英获取</h5><blockquote>
+<p>网址: <a href="https://www.pgyer.com/udid" target="_blank" rel="noopener">dandelion</a></p>
+</blockquote>
+<p><img src="/2018/10/31/ios打包ipa/WX20181101-163229.png" alt="img"></p>
+<h4 id="1-4-iOS-Provisioning-Profiles-描述文件"><a href="#1-4-iOS-Provisioning-Profiles-描述文件" class="headerlink" title="1.4 iOS Provisioning Profiles (描述文件)"></a>1.4 iOS Provisioning Profiles (描述文件)</h4><p><img src="/2018/10/31/ios打包ipa/WX20181101-165216.png" alt="img"></p>
 <h3 id="Xcode删除证书文件-Xcode-10"><a href="#Xcode删除证书文件-Xcode-10" class="headerlink" title="Xcode删除证书文件 (Xcode 10)"></a>Xcode删除证书文件 (Xcode 10)</h3><blockquote>
 <p>control+空格 , 粘贴下面路径, 回车后删除里面文件夹</p>
 </blockquote>
