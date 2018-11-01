@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <title>
+        
+        ios打包总结(1) - Every step counts | Zxd&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://onezx.github.io/2018/11/01/ios打包ipa/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Zxd&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                        <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">archive</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#ios" title="ios">
+                            ios</a>
+                        
+                    </div>
+                    <h1>
+                        ios打包总结(1)
+                    </h1>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        November 01, 2018
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>最近在做ios打包时遇到了很多坑，app是ts写的，并不是swift或者Ob-c，毕竟不是专业的ios开发，也没有用过Xcode打过包，然后各种踩坑，这里记录总结一下。</p>
+<h4 id="1-Apple-developer账号"><a href="#1-Apple-developer账号" class="headerlink" title="1. Apple developer账号"></a>1. Apple developer账号</h4><p>首先得用apple ID注册一个开发者账号，个人和公司账号都是99美元一年，注册步骤网上很多文章，可以搜一下，这里贴上注册等地址</p>
+<ul>
+<li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener">apple developer</a></li>
+<li><a href="https://developer.apple.com/account/" target="_blank" rel="noopener">apple account</a></li>
+<li>ps.注册账号会有一段审核时间，个人账号需要上传身份证等，如果一直没有通过审核, 可以给客服打电话咨询一下，审核速度会快很多哈。</li>
+</ul>
+<h4 id="1-1-iOS-Certificates"><a href="#1-1-iOS-Certificates" class="headerlink" title="1.1 iOS Certificates"></a>1.1 iOS Certificates</h4><p><img src="/2018/11/01/ios打包ipa/WX20181024-164840.png" alt="certificates"><br><img src="/2018/11/01/ios打包ipa/WX20181031-162609.png" alt="imgs"></p>
+<ul>
+<li>ios Certificates分为两种类型<ul>
+<li>development Certificate(开发证书)</li>
+<li>production Certificate(发布证书)</li>
+</ul>
+</li>
+<li>证书: 证明证书拥有者拥有证书上所说的能力。一个证书涉及到颁发者、拥有者、证明拥有者拥有什么能力。<ul>
+<li>颁发者: 自己</li>
+<li>拥有者: 安装证书的电脑</li>
+<li>证明能力: 此电脑可以安装或者打包某应用程序</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-11-添加证书"><a href="#1-11-添加证书" class="headerlink" title="1.11 添加证书"></a>1.11 添加证书</h5><p><img src="/2018/11/01/ios打包ipa/WX20181031-165921.png" alt="img"><br>这里我们主要选择ios App Development或者App Store and Ad Hoc这两类。<code>development证书适用于真机调试</code>，而当我们需要<code>打包成ipa给测试人员测试安装App时</code>，就需要选择 <code>Ad Hoc</code>这一项。最后创建证书的时候需要一个CSR文件，下面我们来看怎么创建CSR。</p>
+<h5 id="1-12-创建CSR文件-Certificate-Signing-Request"><a href="#1-12-创建CSR文件-Certificate-Signing-Request" class="headerlink" title="1.12 创建CSR文件 (Certificate Signing Request)"></a>1.12 创建CSR文件 (Certificate Signing Request)</h5><p><img src="/2018/11/01/ios打包ipa/WX20181031-170857.png" alt="img"></p>
+<ul>
+<li>在Mac的<code>应用程序</code>中找到并打开<code>钥匙串访问工具(keyAccess)</code>，选择<code>从证书颁发机构请求证书</code></li>
+</ul>
+<p><img src="/2018/11/01/ios打包ipa/WX20181101-110955.png" alt="img"></p>
+<ul>
+<li>这里输入一个邮箱，常用名称默认就行，CA电子邮箱可以不用填写，注意选择<code>存储到磁盘</code>。之后注意保存的位置，在创建证书的时候选择这个文件。</li>
+</ul>
+<p><img src="/2018/11/01/ios打包ipa/屏幕快照 2018-11-01 上午11.12.45.png" alt="img"></p>
+<h5 id="1-13-证书在Xcode工程中的位置"><a href="#1-13-证书在Xcode工程中的位置" class="headerlink" title="1.13 证书在Xcode工程中的位置"></a>1.13 证书在Xcode工程中的位置</h5><p><img src="/2018/11/01/ios打包ipa/WX20181031-165001.png" alt="img"></p>
+<ul>
+<li>ps.这里我们选择了Automatically manage signing, 自动管理证书</li>
+</ul>
+<h4 id="1-2-App-IDs"><a href="#1-2-App-IDs" class="headerlink" title="1.2 App IDs"></a>1.2 App IDs</h4><p><img src="/2018/11/01/ios打包ipa/WX20181101-114108.png" alt="img"><br><img src="/2018/11/01/ios打包ipa/WX20181101-114336.png" alt="img"></p>
+<blockquote>
+<p>App ID</p>
+</blockquote>
+<ul>
+<li>App ID就是一个App的身份证, 一个App的唯一标志，在project中叫做Bundle ID，Xcode中<code>Bundle Identifier</code>中填写这一唯一标志。</li>
+<li><code>Bundle ID</code>字符串最好保持reverse-DNS的格式，例如，app名字叫hello，公司的域名是github.com，那么bundle id就可以写 <code>com.github.hello</code> ，Bundle ID是大小写敏感的。</li>
+<li>ps.上图中<code>XC Wildcard</code> 表示的是选择自动管理证书时,自动创建的app名字, ID是一个<code>*</code>通配符</li>
+</ul>
+<h5 id="1-21-添加App-ID"><a href="#1-21-添加App-ID" class="headerlink" title="1.21 添加App ID"></a>1.21 添加App ID</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-155409.png" alt="img"></p>
+<ul>
+<li>App ID Description(ID描述)<ul>
+<li>也就是给这个app取个名字</li>
+</ul>
+</li>
+<li>App ID Prefix(ID前缀)<ul>
+<li>这里苹果为了更精确的表示APP ID的唯一性，使用了开发者账号的<code>Team ID</code>作为App ID的前缀。</li>
+</ul>
+</li>
+<li>App ID Suffix(ID后缀)<ul>
+<li><code>Explicit App ID</code> (精确的ID)   我们大多数都是填写这一项, 直接填写<code>Bundle ID</code></li>
+<li>Wildcard App ID (通用的ID) </li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-Devices"><a href="#1-3-Devices" class="headerlink" title="1.3 Devices"></a>1.3 Devices</h4><p><img src="/2018/11/01/ios打包ipa/WX20181101-160730.png" alt="img"><br>Devices就是我们用来测试的设备，iphone，pad等。我们需要获得待测试iphone或pad的<code>udid</code>。</p>
+<blockquote>
+<p>UDID </p>
+</blockquote>
+<ul>
+<li>udid是ios设配的唯一识别码, 就像我们的身份证一样. 我们可以用Itunes连接iphone获取它的udid, 另外还有很多其他方式.</li>
+<li>ps.每个开发者账号最多添加<code>100</code>台测试设备</li>
+</ul>
+<h5 id="1-31-使用itunes获取iphone的udid"><a href="#1-31-使用itunes获取iphone的udid" class="headerlink" title="1.31 使用itunes获取iphone的udid"></a>1.31 使用itunes获取iphone的udid</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-162530.png" alt="img"></p>
+<ul>
+<li>这里如果不是显示的<code>UDID</code>, 鼠标点击会切换, 多点几下就是了</li>
+</ul>
+<h5 id="1-32-使用蒲公英获取"><a href="#1-32-使用蒲公英获取" class="headerlink" title="1.32 使用蒲公英获取"></a>1.32 使用蒲公英获取</h5><blockquote>
+<p>网址: <a href="https://www.pgyer.com/udid" target="_blank" rel="noopener">dandelion</a></p>
+</blockquote>
+<p><img src="/2018/11/01/ios打包ipa/WX20181101-163229.png" alt="img"></p>
+<h4 id="1-4-iOS-Provisioning-Profiles-描述文件"><a href="#1-4-iOS-Provisioning-Profiles-描述文件" class="headerlink" title="1.4 iOS Provisioning Profiles (描述文件)"></a>1.4 iOS Provisioning Profiles (描述文件)</h4><blockquote>
+<p>创建描述文件</p>
+</blockquote>
+<h5 id="1-41-选择创建描述文件的类型"><a href="#1-41-选择创建描述文件的类型" class="headerlink" title="1.41 选择创建描述文件的类型"></a>1.41 选择创建描述文件的类型</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-165216.png" alt="img"></p>
+<h5 id="1-42-选择App-ID"><a href="#1-42-选择App-ID" class="headerlink" title="1.42 选择App ID"></a>1.42 选择App ID</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-171954.png" alt="img"></p>
+<h5 id="1-43-选择certificate-证书"><a href="#1-43-选择certificate-证书" class="headerlink" title="1.43 选择certificate 证书"></a>1.43 选择certificate 证书</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172225.png" alt="img"></p>
+<h5 id="1-44-选择要安装的设备-udid"><a href="#1-44-选择要安装的设备-udid" class="headerlink" title="1.44 选择要安装的设备(udid)"></a>1.44 选择要安装的设备(udid)</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172441.png" alt="img"></p>
+<h5 id="1-45-给文件命一个名字"><a href="#1-45-给文件命一个名字" class="headerlink" title="1.45 给文件命一个名字"></a>1.45 给文件命一个名字</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172627.png" alt="img"></p>
+<h5 id="1-46-下载保持到本地"><a href="#1-46-下载保持到本地" class="headerlink" title="1.46 下载保持到本地"></a>1.46 下载保持到本地</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172825.png" alt="img"></p>
+<h4 id="Xcode删除证书文件-Xcode-10"><a href="#Xcode删除证书文件-Xcode-10" class="headerlink" title="Xcode删除证书文件 (Xcode 10)"></a>Xcode删除证书文件 (Xcode 10)</h4><blockquote>
+<p>control+空格 , 粘贴下面路径, 回车后删除里面文件夹</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/MobileDevice/Provisioning Profiles</span><br></pre></td></tr></table></figure>
+<h4 id="删除Archive文件"><a href="#删除Archive文件" class="headerlink" title="删除Archive文件"></a>删除Archive文件</h4><blockquote>
+<p>control+空格</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/Developer/Xcode/Archives</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>control+.</code>切换中英文标点</li>
+</ul>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/10/18/git-Merge-Branch/" data-toggle="tooltip" data-placement="top"
+                            title="Git Merge Branch">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+            <!-- Side Catalog Container -->
+            
+
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy;
+                    Zxd&#39;s Blog
+                    2018
+                    <br>
+                    <!-- Powered by <a href="https://onezx.github.io">Zxd</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+                        height="20px" src="https://ghbtns.com/github-btn.html?user=OneZx&repo=OneZx.github.io&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if ($('#tag_cloud').length !== 0) {
+        async("https://onezx.github.io/js/jquery.tagcloud.js", function () {
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: { start: '#bbbbee', end: '#0085a1' },
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<!-- cdn换过了 -->
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+    <!-- Image to hack wechat -->
+    <!-- <img src="https://onezx.github.io/img/icon_wechat.jpeg" width="0" height="0" /> -->
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
