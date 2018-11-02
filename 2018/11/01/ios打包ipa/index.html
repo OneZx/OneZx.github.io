@@ -87,7 +87,7 @@
 
                         
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/archive/">archive</a>
                         </li>
                         
                     
@@ -101,7 +101,7 @@
 
                         
                         <li>
-                            <a href="/archive/">archive</a>
+                            <a href="/tags/">tags</a>
                         </li>
                         
                     
@@ -271,15 +271,20 @@
 </blockquote>
 <p><img src="/2018/11/01/ios打包ipa/WX20181101-163229.png" alt="img"></p>
 <h4 id="1-4-iOS-Provisioning-Profiles-描述文件"><a href="#1-4-iOS-Provisioning-Profiles-描述文件" class="headerlink" title="1.4 iOS Provisioning Profiles (描述文件)"></a>1.4 iOS Provisioning Profiles (描述文件)</h4><blockquote>
-<p>创建描述文件</p>
+<p>描述文件</p>
 </blockquote>
+<ul>
+<li>Provisioning Profiles就是将<code>Certificate</code>, <code>App ID</code>与<code>Devices</code>绑定在一起的配置文件, 看官方文档的说明如下, 我们按照步骤来创建一个用于发布测试的描述文件</li>
+</ul>
+<p><img src="/2018/11/01/ios打包ipa/WX20181102-160226.png" alt="img"></p>
 <h5 id="1-41-选择创建描述文件的类型"><a href="#1-41-选择创建描述文件的类型" class="headerlink" title="1.41 选择创建描述文件的类型"></a>1.41 选择创建描述文件的类型</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-165216.png" alt="img"></p>
 <h5 id="1-42-选择App-ID"><a href="#1-42-选择App-ID" class="headerlink" title="1.42 选择App ID"></a>1.42 选择App ID</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-171954.png" alt="img"></p>
 <h5 id="1-43-选择certificate-证书"><a href="#1-43-选择certificate-证书" class="headerlink" title="1.43 选择certificate 证书"></a>1.43 选择certificate 证书</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172225.png" alt="img"></p>
 <h5 id="1-44-选择要安装的设备-udid"><a href="#1-44-选择要安装的设备-udid" class="headerlink" title="1.44 选择要安装的设备(udid)"></a>1.44 选择要安装的设备(udid)</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172441.png" alt="img"></p>
 <h5 id="1-45-给文件命一个名字"><a href="#1-45-给文件命一个名字" class="headerlink" title="1.45 给文件命一个名字"></a>1.45 给文件命一个名字</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172627.png" alt="img"></p>
 <h5 id="1-46-下载保持到本地"><a href="#1-46-下载保持到本地" class="headerlink" title="1.46 下载保持到本地"></a>1.46 下载保持到本地</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172825.png" alt="img"></p>
-<h4 id="Xcode删除证书文件-Xcode-10"><a href="#Xcode删除证书文件-Xcode-10" class="headerlink" title="Xcode删除证书文件 (Xcode 10)"></a>Xcode删除证书文件 (Xcode 10)</h4><blockquote>
+<h5 id="帮助文档-help"><a href="#帮助文档-help" class="headerlink" title="帮助文档 help"></a>帮助文档 <a href="https://help.apple.com/developer-account/" target="_blank" rel="noopener">help</a></h5><h4 id="2-在Xcode中打包ipa"><a href="#2-在Xcode中打包ipa" class="headerlink" title="2.在Xcode中打包ipa"></a>2.在Xcode中打包ipa</h4><p>经过<code>创建证书</code>, <code>创建app ID</code>, <code>添加测试devices</code>, <code>创建Provisioning Profiles</code>这四个步骤后, 我们就可以在Xcode中为app配置打包了, 这里我是用ionic3结合angular5写的app, Android的打包配置比较简单, 配置好环境后几句命令行就ok, 大家可以自己去搜一下资料. 我主要介绍下ios的打包步骤, 见下一篇 : )</p>
+<h4 id="PS-Xcode删除证书文件-Xcode-10"><a href="#PS-Xcode删除证书文件-Xcode-10" class="headerlink" title="PS. Xcode删除证书文件 (Xcode 10)"></a>PS. Xcode删除证书文件 (Xcode 10)</h4><blockquote>
 <p>control+空格 , 粘贴下面路径, 回车后删除里面文件夹</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/MobileDevice/Provisioning Profiles</span><br></pre></td></tr></table></figure>
