@@ -13,7 +13,7 @@
 
     <title>
         
-        ios打包总结(1) - Every step counts | Zxd&#39;s Blog
+        ios打包总结 (1) - Every step counts | Zxd&#39;s Blog
         
     </title>
 
@@ -167,7 +167,7 @@
                         
                     </div>
                     <h1>
-                        ios打包总结(1)
+                        ios打包总结 (1)
                     </h1>
                     <h2 class="subheading">
                         
@@ -199,7 +199,7 @@
 <ul>
 <li><a href="https://developer.apple.com/programs/enroll/" target="_blank" rel="noopener">apple developer</a></li>
 <li><a href="https://developer.apple.com/account/" target="_blank" rel="noopener">apple account</a></li>
-<li>ps.注册账号会有一段审核时间，个人账号需要上传身份证等，如果一直没有通过审核, 可以给客服打电话咨询一下，审核速度会快很多哈。</li>
+<li>ps.注册账号会有一段审核时间，个人账号需要上传身份证等，如果一直没有通过审核， 可以给客服打电话咨询一下，审核速度会快很多哈。</li>
 </ul>
 <h4 id="1-1-iOS-Certificates"><a href="#1-1-iOS-Certificates" class="headerlink" title="1.1 iOS Certificates"></a>1.1 iOS Certificates</h4><p><img src="/2018/11/01/ios打包ipa/WX20181024-164840.png" alt="certificates"><br><img src="/2018/11/01/ios打包ipa/WX20181031-162609.png" alt="imgs"></p>
 <ul>
@@ -227,16 +227,16 @@
 <p><img src="/2018/11/01/ios打包ipa/屏幕快照 2018-11-01 上午11.12.45.png" alt="img"></p>
 <h5 id="1-13-证书在Xcode工程中的位置"><a href="#1-13-证书在Xcode工程中的位置" class="headerlink" title="1.13 证书在Xcode工程中的位置"></a>1.13 证书在Xcode工程中的位置</h5><p><img src="/2018/11/01/ios打包ipa/WX20181031-165001.png" alt="img"></p>
 <ul>
-<li>ps.这里我们选择了Automatically manage signing, 自动管理证书</li>
+<li>ps.这里我们选择了Automatically manage signing， 自动管理证书</li>
 </ul>
 <h4 id="1-2-App-IDs"><a href="#1-2-App-IDs" class="headerlink" title="1.2 App IDs"></a>1.2 App IDs</h4><p><img src="/2018/11/01/ios打包ipa/WX20181101-114108.png" alt="img"><br><img src="/2018/11/01/ios打包ipa/WX20181101-114336.png" alt="img"></p>
 <blockquote>
 <p>App ID</p>
 </blockquote>
 <ul>
-<li>App ID就是一个App的身份证, 一个App的唯一标志，在project中叫做Bundle ID，Xcode中<code>Bundle Identifier</code>中填写这一唯一标志。</li>
+<li>App ID就是一个App的身份证， 一个App的唯一标志，在project中叫做Bundle ID，Xcode中<code>Bundle Identifier</code>中填写这一唯一标志。</li>
 <li><code>Bundle ID</code>字符串最好保持reverse-DNS的格式，例如，app名字叫hello，公司的域名是github.com，那么bundle id就可以写 <code>com.github.hello</code> ，Bundle ID是大小写敏感的。</li>
-<li>ps.上图中<code>XC Wildcard</code> 表示的是选择自动管理证书时,自动创建的app名字, ID是一个<code>*</code>通配符</li>
+<li>ps.上图中<code>XC Wildcard</code> 表示的是选择自动管理证书时，自动创建的app名字， ID是一个<code>*</code>通配符</li>
 </ul>
 <h5 id="1-21-添加App-ID"><a href="#1-21-添加App-ID" class="headerlink" title="1.21 添加App ID"></a>1.21 添加App ID</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-155409.png" alt="img"></p>
 <ul>
@@ -249,7 +249,7 @@
 </ul>
 </li>
 <li>App ID Suffix(ID后缀)<ul>
-<li><code>Explicit App ID</code> (精确的ID)   我们大多数都是填写这一项, 直接填写<code>Bundle ID</code></li>
+<li><code>Explicit App ID</code> (精确的ID)   我们大多数都是填写这一项， 直接填写<code>Bundle ID</code></li>
 <li>Wildcard App ID (通用的ID) </li>
 </ul>
 </li>
@@ -259,12 +259,12 @@
 <p>UDID </p>
 </blockquote>
 <ul>
-<li>udid是ios设配的唯一识别码, 就像我们的身份证一样. 我们可以用Itunes连接iphone获取它的udid, 另外还有很多其他方式.</li>
+<li>udid是ios设配的唯一识别码， 就像我们的身份证一样. 我们可以用Itunes连接iphone获取它的udid， 另外还有很多其他方式.</li>
 <li>ps.每个开发者账号最多添加<code>100</code>台测试设备</li>
 </ul>
 <h5 id="1-31-使用itunes获取iphone的udid"><a href="#1-31-使用itunes获取iphone的udid" class="headerlink" title="1.31 使用itunes获取iphone的udid"></a>1.31 使用itunes获取iphone的udid</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-162530.png" alt="img"></p>
 <ul>
-<li>这里如果不是显示的<code>UDID</code>, 鼠标点击会切换, 多点几下就是了</li>
+<li>这里如果不是显示的<code>UDID</code>， 鼠标点击会切换， 多点几下就是了</li>
 </ul>
 <h5 id="1-32-使用蒲公英获取"><a href="#1-32-使用蒲公英获取" class="headerlink" title="1.32 使用蒲公英获取"></a>1.32 使用蒲公英获取</h5><blockquote>
 <p>网址: <a href="https://www.pgyer.com/udid" target="_blank" rel="noopener">dandelion</a></p>
@@ -274,7 +274,7 @@
 <p>描述文件</p>
 </blockquote>
 <ul>
-<li>Provisioning Profiles就是将<code>Certificate</code>, <code>App ID</code>与<code>Devices</code>绑定在一起的配置文件, 看官方文档的说明如下, 我们按照步骤来创建一个用于发布测试的描述文件</li>
+<li>Provisioning Profiles就是将<code>Certificate</code>， <code>App ID</code>与<code>Devices</code>绑定在一起的配置文件， 看官方文档的说明如下， 我们按照步骤来创建一个用于发布测试的描述文件，</li>
 </ul>
 <p><img src="/2018/11/01/ios打包ipa/WX20181102-160226.png" alt="img"></p>
 <h5 id="1-41-选择创建描述文件的类型"><a href="#1-41-选择创建描述文件的类型" class="headerlink" title="1.41 选择创建描述文件的类型"></a>1.41 选择创建描述文件的类型</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-165216.png" alt="img"></p>
@@ -283,9 +283,9 @@
 <h5 id="1-44-选择要安装的设备-udid"><a href="#1-44-选择要安装的设备-udid" class="headerlink" title="1.44 选择要安装的设备(udid)"></a>1.44 选择要安装的设备(udid)</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172441.png" alt="img"></p>
 <h5 id="1-45-给文件命一个名字"><a href="#1-45-给文件命一个名字" class="headerlink" title="1.45 给文件命一个名字"></a>1.45 给文件命一个名字</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172627.png" alt="img"></p>
 <h5 id="1-46-下载保持到本地"><a href="#1-46-下载保持到本地" class="headerlink" title="1.46 下载保持到本地"></a>1.46 下载保持到本地</h5><p><img src="/2018/11/01/ios打包ipa/WX20181101-172825.png" alt="img"></p>
-<h5 id="帮助文档-help"><a href="#帮助文档-help" class="headerlink" title="帮助文档 help"></a>帮助文档 <a href="https://help.apple.com/developer-account/" target="_blank" rel="noopener">help</a></h5><h4 id="2-在Xcode中打包ipa"><a href="#2-在Xcode中打包ipa" class="headerlink" title="2.在Xcode中打包ipa"></a>2.在Xcode中打包ipa</h4><p>经过<code>创建证书</code>, <code>创建app ID</code>, <code>添加测试devices</code>, <code>创建Provisioning Profiles</code>这四个步骤后, 我们就可以在Xcode中为app配置打包了, 这里我是用ionic3结合angular5写的app, Android的打包配置比较简单, 配置好环境后几句命令行就ok, 大家可以自己去搜一下资料. 我主要介绍下ios的打包步骤, 见下一篇 : )</p>
+<h5 id="帮助文档-help"><a href="#帮助文档-help" class="headerlink" title="帮助文档 help"></a>帮助文档 <a href="https://help.apple.com/developer-account/" target="_blank" rel="noopener">help</a></h5><h4 id="2-在Xcode中打包ipa"><a href="#2-在Xcode中打包ipa" class="headerlink" title="2.在Xcode中打包ipa"></a>2.在Xcode中打包ipa</h4><p>经过<code>创建Certificate</code>， <code>创建App ID</code>， <code>添加测试devices</code>， <code>创建Provisioning Profiles</code>这四个步骤后， 我们就可以在Xcode中为app配置打包了， 这里我是用ionic3结合angular5写的app， Android的打包配置比较简单， 配置好环境后几句命令行就ok， 大家可以自己去搜一下资料. 我主要介绍下ios的打包步骤， 见下一篇 : )</p>
 <h4 id="PS-Xcode删除证书文件-Xcode-10"><a href="#PS-Xcode删除证书文件-Xcode-10" class="headerlink" title="PS. Xcode删除证书文件 (Xcode 10)"></a>PS. Xcode删除证书文件 (Xcode 10)</h4><blockquote>
-<p>control+空格 , 粘贴下面路径, 回车后删除里面文件夹</p>
+<p>control+空格 ， 粘贴下面路径， 回车后删除里面文件夹</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/MobileDevice/Provisioning Profiles</span><br></pre></td></tr></table></figure>
 <h4 id="删除Archive文件"><a href="#删除Archive文件" class="headerlink" title="删除Archive文件"></a>删除Archive文件</h4><blockquote>
@@ -302,6 +302,11 @@
                 
 
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/11/02/ios打包总结/" data-toggle="tooltip" data-placement="top"
+                            title="ios打包总结 (2)">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">

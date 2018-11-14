@@ -13,11 +13,11 @@
 
     <title>
         
-        Every step counts | Zxd&#39;s Blog
+        ios打包总结 (2) - Every step counts | Zxd&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://onezx.github.io/">
+    <link rel="canonical" href="https://onezx.github.io/2018/11/02/ios打包总结/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,373 +144,119 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#ios" title="ios">
+                            ios</a>
+                        
+                    </div>
                     <h1>
-                        Zxd&#39;s Blog
+                        ios打包总结 (2)
                     </h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">
-                        Every step counts</span>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        November 02, 2018
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>经过<code>创建Certificate</code>， <code>创建App ID</code>， <code>添加测试devices</code>， <code>创建Provisioning Profiles</code>这四个步骤后， 我们就可以在Xcode中为app配置打包了。这里我是用ionic3结合angular5写的app， Android的打包配置比较简单， 配置好环境后几句命令行就ok， 大家可以自己去搜一下资料。我主要介绍下Xcode打包ipa的步骤。</p>
+<h4 id="1-生成xxx-xcodeproj文件"><a href="#1-生成xxx-xcodeproj文件" class="headerlink" title="1. 生成xxx.xcodeproj文件"></a>1. 生成xxx.xcodeproj文件</h4><p>不同的开发方式生成xcodeproj文件的步骤不一样, 这里我是用ionic3.</p>
+<blockquote>
+<p>在ionic3中添加ios platform</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cordova platform add ios</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>生成打包ios项目</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ionic cordova build ios --prod</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>打开Xcode, 选择在platform文件夹中选择xxx.xcodeproj,打开项目</p>
+</blockquote>
 
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-        <!-- USE SIDEBAR -->
-        <!-- Post Container -->
-        <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-
-            <!-- Main Content -->
-
-
-<div class="post-preview">
-
-    <a href="/2018/11/02/ios打包总结/">
-        <h2 class="post-title">
-            ios打包总结 (2)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            经过创建Certificate， 创建App ID， 添加测试devices， 创建Provisioning Profiles这四个步骤后， 我们就可以在Xcode中为app配置打包了。这里我是......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        November 02, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/11/01/ios打包ipa/">
-        <h2 class="post-title">
-            ios打包总结 (1)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            最近在做ios打包时遇到了很多坑，app是ts写的，并不是swift或者Ob-c，毕竟不是专业的ios开发，也没有用过Xcode打过包，然后各种踩坑，这里记录总结一下。
-1. Apple dev......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        November 01, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/18/git-Merge-Branch/">
-        <h2 class="post-title">
-            Git Merge Branch
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. Showing Your Remotesgit remote. It lists the shortnames of each remote handle you’ve specified......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        October 18, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/18/git初始化/">
-        <h2 class="post-title">
-            Git初始化
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            gitGit 是一个开源的分布式版本控制系统(Distributed Version Control System,DVCS),用于敏捷高效地处理任何或小或大的项目
-Git 的下载 : ==&g......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        October 18, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/10/17/2018-10-17-Node在云服务器上的部署/">
-        <h2 class="post-title">
-            Node在云服务器上的部署
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前段时间折腾了下Node在云服务器上的部署, 网上也有很多资源, 我这儿暂时没有时间好好整理过程, 先贴下一些琐碎的笔记. 等有空了重新整理一下
-
-使用Xshell远程登录服务器, 具体查看有道......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        October 17, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/07/27/7-27-Reading/">
-        <h2 class="post-title">
-            The files you need to make your own gun can now be legally shared online
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            The files you need to make your own gun can now be legally shared onlineA decision from the US De......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        July 27, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/07/26/2018-7-26-Reading/">
-        <h2 class="post-title">
-            Trump visit to U.K. inspires yearning for a 'Love Actually' moment
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Trump visit to U.K. inspires yearning for a ‘Love Actually’ momentHow should Prime Minister There......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        July 26, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/06/28/2018-8-9-MongoDB/">
-        <h2 class="post-title">
-            MongoDB基础知识总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-基本概念
-
-
-
-
-sql
-monogodb
-说明
-
-
-
-
-database
-database
-数据库
-
-
-table
-collection
-数据库表/集合
-
-
-row
-document
-数据记......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        June 28, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/03/20/Vue动画/">
-        <h2 class="post-title">
-            Vue动画
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            单元素/组件的过渡在以下情形中，transition封装组件，可以给任何元素和组件添加进入/离开过渡
-
-条件渲染(v-if)
-条件展示(v-show)
-动态组件
-组件根节点？
-
-过渡的类名
-
-v......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        March 20, 2018
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/03/19/Vue组件相关/">
-        <h2 class="post-title">
-            Vue组件相关
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            父子组件间的数据传递
-父组件通过属性的形式(v-bind:[xxx])向子组件传递数据
-子组件通过事件触发的形式向父组件传值
-单项数据流:父组件可以向子组件传递任意数据,但是子组件不能修改传递过......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by
-        Zxd on
-        March 19, 2018
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page/2/">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
-            <!-- 如果开启评论功能 -->
-            
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-            <!-- Featured Tags -->
-            
-
-            <!-- Short About -->
-            <section class="visible-md visible-lg">
                 <hr>
-                <h5><a href="/about/">ABOUT ME</a></h5>
-                <div class="short-about">
 
+                
+
+                <ul class="pager">
                     
-                    <img src="/img/avatar-zxd.jpeg" />
                     
-
+                    <li class="next">
+                        <a href="/2018/11/01/ios打包ipa/" data-toggle="tooltip" data-placement="top"
+                            title="ios打包总结 (1)">Next Post &rarr;</a>
+                    </li>
                     
-                    <p>
-                        从前车马很慢 书信很远
-                    </p>
-                    
+                </ul>
 
-                    <!-- SNS Link -->
-                    <ul class="list-inline">
-                        
-                        
-                        
+                
 
-                        
+                
 
-                        
-
-                        
-
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Friends Blog -->
+            </div>
+            <!-- Side Catalog Container -->
             
+
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+
         </div>
-        
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
     <!-- Footer -->
     <!-- Footer -->
