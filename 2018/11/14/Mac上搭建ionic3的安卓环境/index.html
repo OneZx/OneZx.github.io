@@ -87,13 +87,6 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">archive</a>
                         </li>
                         
@@ -102,6 +95,13 @@
                         
                         <li>
                             <a href="/tags/">tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -233,6 +233,38 @@
 <li>设定默认node版本<code>nvm alias default v8.9.1</code> </li>
 <li>以上,都可以省略v和简写 <code>nvm use 8.9</code> <code>nvm use 8</code></li>
 </ul>
+<h4 id="2-安装ionic和cordova"><a href="#2-安装ionic和cordova" class="headerlink" title="2. 安装ionic和cordova"></a>2. 安装ionic和cordova</h4><blockquote>
+<p><a href="https://ionicframework.com/docs/intro/installation/" target="_blank" rel="noopener">https://ionicframework.com/docs/intro/installation/</a></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g ionic cordova</span><br></pre></td></tr></table></figure>
+<h4 id="3-安装JDK-Gradle和Android-Studio"><a href="#3-安装JDK-Gradle和Android-Studio" class="headerlink" title="3. 安装JDK,Gradle和Android Studio"></a>3. 安装JDK,Gradle和Android Studio</h4><blockquote>
+<p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">JDK 8下载</a></p>
+</blockquote>
+<p>JDK下载后直接安装就好～<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看安装好 java -version</span><br></pre></td></tr></table></figure></p>
+<p>我们需要先装好JDK才能装<code>gradle</code></p>
+<blockquote>
+<p><a href="https://gradle.org/install/" target="_blank" rel="noopener">Gradle的安装</a></p>
+</blockquote>
+<ol>
+<li>通过<code>homebrew</code>安装gradle</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install gradle</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>直接下载安装 <a href="https://gradle.org/releases/" target="_blank" rel="noopener">https://gradle.org/releases/</a> , 注意选择<code>complete</code>版本,建议用<code>brew</code>安装，不用再自己配置环境变量了</li>
+</ol>
+<blockquote>
+<p><a href="https://developer.android.google.cn/studio/" target="_blank" rel="noopener">Android Studio的安装</a></p>
+</blockquote>
+<ul>
+<li><p><a href="https://cordova.apache.org/docs/en/8.x/guide/platforms/android/" target="_blank" rel="noopener">cordova android</a></p>
+</li>
+<li><p>配置 <code>ANDROID_HOME</code>，打开bash_profile，<code>open -e .bash_profile</code>，在里面配置自己的安卓sdk等环境变量</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export ANDROID_HOME=&quot;/Users/zxd/Library/Android/sdk&quot;</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/tools/bin</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/tools</span><br><span class="line">export PATH=$PATH:$ANDROID_HOME/platform-tools</span><br></pre></td></tr></table></figure>
+<p>如果以上配置都弄好了，我们可以运行<code>ionic start myApp tabs</code>来新建一个项目，并启动<code>ionic serve</code>，试一试打包android的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cordova platform add android  添加安卓平台</span><br><span class="line">sudo ionic cordova build android --prod  压缩打包apk</span><br></pre></td></tr></table></figure>
+<p>如果能成功打包apk，表示已经ok了哈～</p>
 
 
                 <hr>
