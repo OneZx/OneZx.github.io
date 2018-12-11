@@ -13,11 +13,11 @@
 
     <title>
         
-        常用抓包工具的安装与使用 - charles, fiddler &amp; burpsuite - Every step counts | Zxd&#39;s Blog
+        如何通过VPS搭建SSR - Every step counts | Zxd&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://onezx.github.io/2018/11/30/常用抓包工具的安装与使用-charles-fiddler-burpsuite/">
+    <link rel="canonical" href="https://onezx.github.io/2018/12/11/如何通过vps搭建ssr/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -162,12 +162,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#web安全" title="web安全">
-                            web安全</a>
+                        <a class="tag" href="/tags/#vps" title="vps">
+                            vps</a>
+                        
+                        <a class="tag" href="/tags/#ssr" title="ssr">
+                            ssr</a>
                         
                     </div>
                     <h1>
-                        常用抓包工具的安装与使用 - charles, fiddler &amp; burpsuite
+                        如何通过VPS搭建SSR
                     </h1>
                     <h2 class="subheading">
                         
@@ -175,7 +178,7 @@
                     <span class="meta">
                         Posted by
                         Zxd on
-                        November 30, 2018
+                        December 11, 2018
                     </span>
                 </div>
             </div>
@@ -194,17 +197,82 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>我们在安全测试时常用的工具是<code>burp suite</code>, 可用于web应用攻击, 渗透测试等. 另外app抓包也有两个常用的工具, <code>charles</code>和<code>fiddler</code>. 在Mac端常用charles, windows常用fiddler, 不过现在fiddler也支持mac版, 但是需要下载<a href="https://www.mono-project.com/download/stable/" target="_blank" rel="noopener">Mono</a>, 具体安装参照<a href="https://www.telerik.com/download/fiddler" target="_blank" rel="noopener">fiddler官网</a>.这里我们先看一下charles的安装.</p>
-<h4 id="1-Charles的下载安装"><a href="#1-Charles的下载安装" class="headerlink" title="1. Charles的下载安装"></a>1. Charles的下载安装</h4><p>我们直接从官网下载 <a href="https://www.charlesproxy.com/download/" target="_blank" rel="noopener">Charles</a>, 选中自己需要的版本.(目前最新版本是4.2.7)</p>
-<h4 id="2-Charles的破解"><a href="#2-Charles的破解" class="headerlink" title="2. Charles的破解"></a>2. Charles的破解</h4><p>Charles破解参照这个地址 <a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener">https://www.zzzmode.com/mytools/charles/</a>, 主要就是生成一个charles.jar文件, 然后替换安装包中的原文件.</p>
-<blockquote>
-<p>Mac</p>
+                <blockquote>
+<p><code>VPS</code>, <code>SSR</code>, <code>VPN</code>是什么</p>
 </blockquote>
-<p>在应用程序中右键显示包内容,在java目录下,替换charles.jar<br><img src="/2018/11/30/常用抓包工具的安装与使用-charles-fiddler-burpsuite/1543546443799.jpg" alt="img"></p>
+<ul>
+<li><p>VPS: 即虚拟专用服务器（Virtual Private Servers）, 将一台服务器分割为多个虚拟专享服务器</p>
+</li>
+<li><p>SSR: shadowsocks-R, SSR是ss改进版, 在shadowsocks的基础上改进了混淆和协议.</p>
+</li>
+<li><p>VPN: 虚拟专用网络 (Virtual Private Network), 在公网上建立专用网络,进行加密通讯.</p>
+</li>
+</ul>
 <blockquote>
-<p>Windows</p>
+<p>搭建<code>SSR</code>有什么用</p>
 </blockquote>
-<p>在<code>Program Files\Charles\lib\charles.jar</code>中替换charles.jar</p>
+<ul>
+<li>世界那么大, 我想去看看 :) </li>
+<li>Google, Facebook, Twitter, Youtube等在国内被封, emmmm~~</li>
+</ul>
+<h4 id="1-怎么搭建SSR"><a href="#1-怎么搭建SSR" class="headerlink" title="1.怎么搭建SSR?"></a>1.怎么搭建SSR?</h4><p>首先, 我们需要购买一个VPS, 这里推荐两个</p>
+<ul>
+<li><a href="https://www.vultr.com/" target="_blank" rel="noopener">vultr</a>  按小时收费, 最低$3.5一小时.</li>
+<li><a href="https://bwh8.net/index.php" target="_blank" rel="noopener">BandwagonHost</a>  按年收费,$30左右一年, 这里有中文非官方网站<a href="http://banwagong.cn/" target="_blank" rel="noopener">搬瓦工</a></li>
+</ul>
+<p>这里, 我选用的是vultr来搭建的, 所以根据这个来写教程哈~~~</p>
+<h5 id="1-注册vultr账号-选择一个服务器购买"><a href="#1-注册vultr账号-选择一个服务器购买" class="headerlink" title="1. 注册vultr账号, 选择一个服务器购买"></a>1. 注册vultr账号, 选择一个服务器购买</h5><p><img src="/2018/12/11/如何通过vps搭建ssr/WX20181211-105019@2x.png" alt="img"></p>
+<p><strong>ps. 注意选择CentOS时要选6的版本,并且不要选$2.5/mo的,因为只支持IPv6,没法部署.</strong></p>
+<p><img src="/2018/12/11/如何通过vps搭建ssr/WX20181211-105452@2x.png" alt="img"></p>
+<p><strong>后面这些选项都可以不用管, 然后点击右下角的<code>deploy now</code></strong><br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181211-110424@2x.png" alt="img"></p>
+<p><strong>支付可以选择微信或支付宝,这个很方便,但首次至少充值10美元</strong><br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181211-110639@2x.png" alt="img"></p>
+<p><strong>在server中可以看见我们刚购买的vps, 点击小图标</strong><br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181211-110944@2x.png" alt="img"><br><strong>进入后可以看到我们需要的公网ip地址,还有ssh登录账号密码等信息,随后我们会用到这些信息</strong><br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181211-111130@2x.png" alt="img"></p>
+<h4 id="2-通过ssh远程连接vps服务器"><a href="#2-通过ssh远程连接vps服务器" class="headerlink" title="2. 通过ssh远程连接vps服务器"></a>2. 通过ssh远程连接vps服务器</h4><ul>
+<li>windows可以用<code>Xshell</code>,<code>putty</code>等连接linux服务器. 具体操作步骤这里不做演示了哈, 大家可以网上搜一下, 教程很多哦</li>
+</ul>
+<p>这里就演示一下Mac连接Linux的方式</p>
+<ul>
+<li><p>打开terminal( iTerm ), 切换root权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo - i</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ssh连接服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx.xx.xx.xxx</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/2018/12/11/如何通过vps搭建ssr/屏幕快照 2018-12-11 下午4.30.51.png" alt="img"></p>
+<h4 id="3-安装服务端的shadowsocks-R"><a href="#3-安装服务端的shadowsocks-R" class="headerlink" title="3. 安装服务端的shadowsocks-R"></a>3. 安装服务端的shadowsocks-R</h4><ul>
+<li>在terminal中, 连接上服务器后, 输入</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://freed.ga/github/shadowsocksR.sh; bash shadowsocksR.sh</span><br></pre></td></tr></table></figure>
+<p>如果提示<code>wget: command not found</code> 先执行<code>yum install wget -y</code></p>
+<ul>
+<li>设置<code>密码</code>和<code>端口</code> , 这里我设置的是8080端口,随意.</li>
+</ul>
+<p><img src="/2018/12/11/如何通过vps搭建ssr/屏幕快照 2018-12-11 下午5.04.27.png" alt="img"></p>
+<ul>
+<li>然后等待一会儿就OK了, 记下<code>ip</code>,<code>密码</code>,<code>加密方式</code>,<code>端口</code>等, 稍后我们会用到. 然后可能网速会有点慢, 还需要更换内核, 加速优化一下.</li>
+<li>先执行下面命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://freed.ga/kernel/ruisu.sh &amp;&amp;</span><br><span class="line">bash ruisu.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里会重启服务器, 再次登录后, 执行下面命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh &amp;&amp; bash serverspeeder.sh</span><br><span class="line"></span><br><span class="line">或者备用</span><br><span class="line"></span><br><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh &amp;&amp; bash serverspeeder-all.sh</span><br></pre></td></tr></table></figure>
+<p>到此, 我们的服务端就配置成功了.</p>
+<h4 id="4-客户端连接服务器"><a href="#4-客户端连接服务器" class="headerlink" title="4. 客户端连接服务器"></a>4. 客户端连接服务器</h4><h4 id="5-端口扫描"><a href="#5-端口扫描" class="headerlink" title="5. 端口扫描"></a>5. 端口扫描</h4><p>有时候我们新开一个vultr的vps, 但是ssh连接不上, 这时候我们就需要看看ip的22端口是否被关闭 (因为有可能ip是别人以前用过的,然后ip还被国内禁了) 22端口用于ssh连接,如果22端口都是关闭状态, 那么需要重新购买一个vps, 销毁之前这个(vultr按小时收费, 所以只需花0.01美元)</p>
+<blockquote>
+<p>查看端口在国内是否被封锁</p>
+</blockquote>
+<ul>
+<li>端口扫描 <a href="http://tool.chinaz.com/port" target="_blank" rel="noopener">站长工具 port扫描</a></li>
+</ul>
+<blockquote>
+<p>查看端口 国外状态</p>
+</blockquote>
+<ul>
+<li><a href="https://www.yougetsignal.com/tools/open-ports/" target="_blank" rel="noopener">端口扫描 国外</a></li>
+</ul>
+<p>如果国内22端口关闭, 国外22端口open的,就需要重新换一个vps, 重新分配一个ip了.</p>
 
 
                 <hr>
@@ -213,15 +281,10 @@
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2018/12/11/如何通过vps搭建ssr/" data-toggle="tooltip" data-placement="top"
-                            title="如何通过VPS搭建SSR">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2018/11/15/白帽子讲web安全/" data-toggle="tooltip" data-placement="top"
-                            title="白帽子讲web安全（1）">Next Post &rarr;</a>
+                        <a href="/2018/11/30/常用抓包工具的安装与使用-charles-fiddler-burpsuite/" data-toggle="tooltip" data-placement="top"
+                            title="常用抓包工具的安装与使用 - charles, fiddler & burpsuite">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
