@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/archive/">archive</a>
+                            <a href="/tags/">tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/archive/">archive</a>
                         </li>
                         
                     
@@ -217,7 +217,7 @@
 </ul>
 <h4 id="1-怎么搭建SSR"><a href="#1-怎么搭建SSR" class="headerlink" title="1.怎么搭建SSR?"></a>1.怎么搭建SSR?</h4><p>首先, 我们需要购买一个VPS, 这里推荐两个</p>
 <ul>
-<li><a href="https://www.vultr.com/" target="_blank" rel="noopener">vultr</a>  按小时收费, 最低$3.5一小时.</li>
+<li><a href="https://www.vultr.com/" target="_blank" rel="noopener">vultr</a>  按小时收费, 最低$3.5一月.</li>
 <li><a href="https://bwh8.net/index.php" target="_blank" rel="noopener">BandwagonHost</a>  按年收费,$30左右一年, 这里有中文非官方网站<a href="http://banwagong.cn/" target="_blank" rel="noopener">搬瓦工</a></li>
 </ul>
 <p>这里, 我选用的是vultr来搭建的, 所以根据这个来写教程哈~~~</p>
@@ -259,7 +259,14 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh &amp;&amp; bash serverspeeder.sh</span><br><span class="line"></span><br><span class="line">或者备用</span><br><span class="line"></span><br><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh &amp;&amp; bash serverspeeder-all.sh</span><br></pre></td></tr></table></figure>
 <p>到此, 我们的服务端就配置成功了.</p>
-<h4 id="4-客户端连接服务器"><a href="#4-客户端连接服务器" class="headerlink" title="4. 客户端连接服务器"></a>4. 客户端连接服务器</h4><h4 id="5-端口扫描"><a href="#5-端口扫描" class="headerlink" title="5. 端口扫描"></a>5. 端口扫描</h4><p>有时候我们新开一个vultr的vps, 但是ssh连接不上, 这时候我们就需要看看ip的22端口是否被关闭 (因为有可能ip是别人以前用过的,然后ip还被国内禁了) 22端口用于ssh连接,如果22端口都是关闭状态, 那么需要重新购买一个vps, 销毁之前这个(vultr按小时收费, 所以只需花0.01美元)</p>
+<h4 id="4-客户端连接服务器"><a href="#4-客户端连接服务器" class="headerlink" title="4. 客户端连接服务器"></a>4. 客户端连接服务器</h4><blockquote>
+<p>Mac </p>
+</blockquote>
+<p>如果是Mac系统, 下载一个<a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/" target="_blank" rel="noopener">ShadowsocksX-NG</a><br>解压安装就好</p>
+<p><img src="/2018/12/11/如何通过vps搭建ssr/WX20181212-103750@2x.png" alt="img"></p>
+<p>安装后在应用程序中打开, 顶部状态栏会出现一个纸飞机的图标, 选择<code>服务器</code>进行配置<br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181212-104459@2x.png" alt="img"><br>输入<code>ip地址,端口号,加密方式和密码</code>后, 就可以直接使用了,点击纸飞机, 让状态为<code>On</code>, 然后需要解释一下<code>PAC模式</code>就是访问国内网站用原来的网络,访问facebook,youtube等自动切换ssr, 建议选择这一项</p>
+<p><img src="/2018/12/11/如何通过vps搭建ssr/屏幕快照 2018-12-12 上午10.50.43.png" alt="img"></p>
+<h4 id="5-端口扫描"><a href="#5-端口扫描" class="headerlink" title="5. 端口扫描"></a>5. 端口扫描</h4><p>有时候我们新开一个vultr的vps, 但是ssh连接不上, 这时候我们就需要看看ip的22端口是否被关闭 (因为有可能ip是别人以前用过的,然后ip还被国内禁了) 22端口用于ssh连接,如果22端口都是关闭状态, 那么需要重新购买一个vps, 销毁之前这个(vultr按小时收费, 所以只需花0.01美元)</p>
 <blockquote>
 <p>查看端口在国内是否被封锁</p>
 </blockquote>
