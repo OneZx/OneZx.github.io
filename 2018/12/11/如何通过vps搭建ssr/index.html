@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/tags/">tags</a>
+                            <a href="/archive/">archive</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">archive</a>
+                            <a href="/tags/">tags</a>
                         </li>
                         
                     
@@ -264,8 +264,23 @@
 </blockquote>
 <p>如果是Mac系统, 下载一个<a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/" target="_blank" rel="noopener">ShadowsocksX-NG</a><br>解压安装就好</p>
 <p><img src="/2018/12/11/如何通过vps搭建ssr/WX20181212-103750@2x.png" alt="img"></p>
-<p>安装后在应用程序中打开, 顶部状态栏会出现一个纸飞机的图标, 选择<code>服务器</code>进行配置<br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181212-104459@2x.png" alt="img"><br>输入<code>ip地址,端口号,加密方式和密码</code>后, 就可以直接使用了,点击纸飞机, 让状态为<code>On</code>, 然后需要解释一下<code>PAC模式</code>就是访问国内网站用原来的网络,访问facebook,youtube等自动切换ssr, 建议选择这一项</p>
+<p>安装后在应用程序中打开, 顶部状态栏会出现一个纸飞机的图标, 选择<code>服务器</code>进行配置<br><img src="/2018/12/11/如何通过vps搭建ssr/WX20181212-104459@2x.png" alt="img"><br>输入<code>ip地址,端口号,加密方式和密码</code>后, 就可以直接使用了,点击纸飞机, 让状态为<code>On</code>, 需要解释一下<code>PAC模式</code>就是访问国内网站用原来的网络,访问facebook,youtube等自动切换到ssr服务器, 建议选择这一项</p>
 <p><img src="/2018/12/11/如何通过vps搭建ssr/屏幕快照 2018-12-12 上午10.50.43.png" alt="img"></p>
+<p>好了, 到此为止, 就大功告成啦~ 贴一下youtube截图<br><img src="/2018/12/11/如何通过vps搭建ssr/屏幕快照 2018-12-12 上午11.25.27.png" alt="img"></p>
+<blockquote>
+<p>windows</p>
+</blockquote>
+<p>同样,需要下载一个客户端, 也是一个纸飞机. 我们只需要填上配置ip密码什么的,然后开启就可以用啦</p>
+<ul>
+<li>windows下载<a href="https://github.com/shadowsocks/shadowsocks-windows" target="_blank" rel="noopener">shadowsocks-windows</a></li>
+</ul>
+<blockquote>
+<p>android iphone</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/shadowsocks/shadowsocks-android" target="_blank" rel="noopener">shadowsocks-android</a><br>大致看了下, 这里是shadowsocks安卓的源代码, 需要我们通过AS自己build一下, 其实安卓版的客户端很好搜,大家可以自己搜一下..</li>
+<li>iphone的基本在app store已经下架了. 要找的话自己搜吧…emm~~我懒得找了哈</li>
+</ul>
 <h4 id="5-端口扫描"><a href="#5-端口扫描" class="headerlink" title="5. 端口扫描"></a>5. 端口扫描</h4><p>有时候我们新开一个vultr的vps, 但是ssh连接不上, 这时候我们就需要看看ip的22端口是否被关闭 (因为有可能ip是别人以前用过的,然后ip还被国内禁了) 22端口用于ssh连接,如果22端口都是关闭状态, 那么需要重新购买一个vps, 销毁之前这个(vultr按小时收费, 所以只需花0.01美元)</p>
 <blockquote>
 <p>查看端口在国内是否被封锁</p>
