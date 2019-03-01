@@ -224,7 +224,57 @@
 <hr>
 <p>但是 JavaScript 引擎要复杂得多,其在语法分析和代码生成阶段有特定的步骤对运行性能进行优化. JavaScript 的编译过程不是发生在构建之前. 大部分情况下编译发生在代码执行的前几微秒的时间内.</p>
 <p><strong>任何 JavaScript 代码片段在执行前都要进行编译(通常就在执行前)</strong></p>
-<h3 id="1-2-理解作用域"><a href="#1-2-理解作用域" class="headerlink" title="1.2 理解作用域"></a>1.2 理解作用域</h3>
+<h3 id="1-2-理解作用域"><a href="#1-2-理解作用域" class="headerlink" title="1.2 理解作用域"></a>1.2 理解作用域</h3><ul>
+<li><strong>引擎</strong><br>负责整个 JS 程序的编译及执行过程</li>
+<li><strong>编译器</strong><br>负责语法分析和代码生成等</li>
+<li><strong>作用域</strong><br>负责收集并维护由所有声明的标识符(变量)组成的一系列查询,并实施严格规则,确定当前执行的代码对这些标识符的访问权限</li>
+</ul>
+<blockquote>
+<p>变量的赋值操作会执行两个操作</p>
+</blockquote>
+<ul>
+<li>首先编译器会在当前作用域声明一个变量(如果没有声明过)</li>
+<li>然后在运行时引擎会在作用域中<code>查找</code>(<code>由作用域协助</code>)该变量,如果找到就会对它赋值</li>
+</ul>
+<blockquote>
+<p><code>LHS</code> 和 <code>RHS</code> 查询</p>
+</blockquote>
+<ul>
+<li><code>LHS</code> : 赋值操作的目标是谁</li>
+<li><p><code>RHS</code> : 谁是赋值操作的源头</p>
+</li>
+<li><p>当变量出现在赋值操作的左侧时,进行 LHS 查询; <code>试图找到变量的容器本身,从而对其赋值</code></p>
+</li>
+<li>出现在右侧进行 RHS 查询; <code>可以理解为简单的查找某个变量的值,等到某某的值, retrieve his source value(取到它的源值)</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = a;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = foo(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LHS  3处</span></span><br><span class="line">c = foo();</span><br><span class="line">a = <span class="number">2</span>(隐式分配);</span><br><span class="line">b = a;</span><br><span class="line"><span class="comment">// RHS 4处</span></span><br><span class="line">foo(<span class="number">2</span>); 找到foo()函数</span><br><span class="line"><span class="keyword">var</span> b = a; 找到a的值</span><br><span class="line"><span class="keyword">return</span> a+b 中, 找到a的值, b的值</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-作用域嵌套"><a href="#1-3-作用域嵌套" class="headerlink" title="1.3 作用域嵌套"></a>1.3 作用域嵌套</h3><ul>
+<li>作用域是根据名称查找变量的一套规则,实际中通常需要同时兼顾几个作用域</li>
+<li>当一个快或函数嵌套在另一个块或函数中时,就发生了作用域嵌套. 所以, <strong>在当前作用域中无法找到某个变量时, 引擎就会在外层嵌套的作用域中继续查找,直到找到该变量, 或抵达最外层的作用域(全局作用域)为止</strong></li>
+</ul>
+<blockquote>
+<p>遍历嵌套作用域链的规则</p>
+</blockquote>
+<ul>
+<li>引擎从当前的执行作用域开始查找变量,如果找不到,就向上一级继续查找. 当抵达最外层全局作用域时,无论找到与否, 查找过程都会停止</li>
+</ul>
+<h3 id="1-4-异常"><a href="#1-4-异常" class="headerlink" title="1.4 异常"></a>1.4 异常</h3><ul>
+<li><strong>在变量没有声明(任何作用域中都无法找到该变量)的情况下, LHS 和 RHS 查询的行为不一样</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a + b);</span><br><span class="line">    b = a;</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>当我们第一次对 b 进行 RHS 查询时, 无法找到该变量 , 也就是 b 是一个未声明的变量</p>
+<ul>
+<li>如果 RHS 查询在所有嵌套的作用域中找不到该变量, 引擎就会抛出 ReferenceError</li>
+<li>当引擎进行 LHS 查询时, 非严格模式下, 如果在顶层(全局作用域)中也无法找到目标变量,全局作用域中就会创建一个具有该名称的变量,并返还给引擎</li>
+<li><strong>严格模式禁止自动或隐式地创建全局变量</strong></li>
+</ul>
+<h3 id="1-5-总结"><a href="#1-5-总结" class="headerlink" title="1.5 总结"></a>1.5 总结</h3><ul>
+<li>作用域是一套规则,用于确定在何处以及如何查找变量.如果查找的目的是对变量赋值,那么就会进行 LHS 查询; 如果目的是获取变量的值, 就会使用 RHS 查询.</li>
+<li>赋值操作符会导致 LHS 查询. 隐式传参也会导致 LHS 查询 foo(2)==&gt;foo(a)</li>
+<li>不成功的 RHS 引用会导致抛出 ReferenceError 异常, 不成功的 LHS 引用会导致自动隐式创建一个全局变量(非严格模式下)</li>
+</ul>
+
 
                 <hr>
 
