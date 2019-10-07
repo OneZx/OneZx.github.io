@@ -13,11 +13,11 @@
 
     <title>
         
-        about - Every step counts
+        原型和原型链 - Every step counts
         
     </title>
 
-    <link rel="canonical" href="https://onezx.github.io/about/">
+    <link rel="canonical" href="https://onezx.github.io/2018/07/23/原型和原型链/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -144,229 +144,148 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://onezx.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JS" title="JS">
+                            JS</a>
+                        
+                    </div>
                     <h1>
-                        about
+                        原型和原型链
                     </h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">
-                        Every step counts</span>
+                    <h2 class="subheading">
+                        
+                    </h2>
+                    <span class="meta">
+                        Posted by
+                        Zxd on
+                        July 23, 2018
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-        <!-- USE SIDEBAR -->
-        <!-- Post Container -->
-        <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-
-            <hr>
-<!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
-<!-- 其中 class="blockquote-center" 是必须的 -->
-<!--   <blockquote class="blockquote-center">blah blah blah</blockquote> -->
-<h4 id="FE-Node-Python"><a href="#FE-Node-Python" class="headerlink" title="FE, Node, Python."></a>FE, Node, Python.</h4><hr>
-<blockquote>
-<p>兴趣爱好</p>
-</blockquote>
-<ol>
-<li>编程<br> <code>喜欢安静地敲着代码</code></li>
-<li>音乐<br> <code>喜欢听歌,唱歌,喜欢木吉他,ukulele,钢琴,陶笛</code></li>
-<li>读书<br> <code>文学类,小说类,IT技术类等</code></li>
-<li>旅游<br> <code>There is such a lot of things on the world to see</code></li>
-<li>摄影<br> <code>喜欢用镜头记录生活中的美</code></li>
-<li>素描<br> <code>只会画画简单的线条,渣渣</code></li>
-<li>…etc.</li>
-</ol>
+                <h4 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Foo(name,age)&#123;</span><br><span class="line">    this.name = name</span><br><span class="line">    this.age = age</span><br><span class="line">    this.class= &apos;class-1&apos;</span><br><span class="line">    //return this // 默认有这一行</span><br><span class="line">&#125;</span><br><span class="line">var f = new Foo(&apos;zhangsan&apos;,20)</span><br><span class="line">//var f1 = new Foo(&apos;lisi&apos;,22) // 创建多个对象</span><br></pre></td></tr></table></figure>
 <hr>
 <blockquote>
-<p>17年计划</p>
+<p>构造函数-扩展</p>
+</blockquote>
+<ul>
+<li><code>var a = {}</code>其实是<code>var a = new Object()</code>的语法糖</li>
+<li><code>var a = []</code>其实是<code>var a = new Array()</code>的语法糖</li>
+<li><code>function Foo(){...}</code>其实是<code>var Foo = new Function(...)</code></li>
+<li>使用<code>instanceof</code>判断一个函数是否是一个变量的构造函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">判断一个变量是否为数组: 变量 instanceof Array</span><br></pre></td></tr></table></figure>
+<h4 id="2-原型规则和示例"><a href="#2-原型规则和示例" class="headerlink" title="2.原型规则和示例"></a>2.原型规则和示例</h4><blockquote>
+<p>5条原型规则</p>
 </blockquote>
 <ol>
-<li>多读书,多写读书笔记,多总结.</li>
-<li>多旅游,多走走看看.</li>
-<li>英文口语需要加强.</li>
-<li>进一步学习React,Vue和Angular.</li>
-<li>学Python</li>
-<li>数据结构和计网的知识,以及算法</li>
+<li><p>所有的引用类型(数组,对象,函数), 都具有对象特性,即可自由扩展属性(除了’null’以外)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;&#125; ; obj.a = 100</span><br><span class="line">var arr = [] ; arr.a = 100</span><br><span class="line">function fn()&#123;&#125; ; fn.a = 100</span><br><span class="line"></span><br><span class="line">console.log(obj.__proto__)</span><br><span class="line">console.log(arr.__proto__)</span><br><span class="line">console.log(fn.__proto__)</span><br><span class="line"></span><br><span class="line">console.log(fn.prototype)</span><br><span class="line"></span><br><span class="line">console.log(obj.__proto__===Object.prototype)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>所有的引用类型(数组,对象,函数), 都有一个<strong>proto</strong>属性(隐式原型),属性值是一个普通的对象</p>
+</li>
+<li>所有的<code>函数</code>,都有一个<code>prototype</code>属性(显示原型),属性值也是一个普通的对象</li>
+<li>所有的引用类型(数组,对象,函数),<code>__proto__</code>属性值指向它的构造函数的<code>prototype</code>属性值</li>
+<li>当试图得到一个对象的某个属性时,如果这个对象本身没有这个属性,那么会去它的<strong>proto</strong>中寻找<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 构造函数</span><br><span class="line">function Foo(name,age)&#123;</span><br><span class="line">    this.name = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.alertName = function()&#123;</span><br><span class="line">    alert(this.name)</span><br><span class="line">&#125;</span><br><span class="line">// 创建示例</span><br><span class="line">var f = new Foo(&apos;zhangsan&apos;)</span><br><span class="line">f.printName = function()&#123;</span><br><span class="line">    console.log(this.name)</span><br><span class="line">&#125;</span><br><span class="line">// 测试</span><br><span class="line">f.printName()</span><br><span class="line">f.alertName()</span><br><span class="line">f.toString() // 要去f.__proto__.__proto__中去查找</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<hr>
-<blockquote>
-<p>一些值得注意的</p>
-</blockquote>
-<ol>
-<li><code>自律</code> 自律才自由</li>
-<li><code>少熬夜</code>,调整生活作息.早睡早起</li>
-<li><code>拖延症</code>,每个人都或多或少有点拖延症,不奇怪,但是你要做不一样的自己.</li>
-<li><code>坚持一件小事</code>,比如坚持每天读书,记笔记.</li>
-<li><code>锻炼身体</code>,跑步等.</li>
-<li><code>换位考虑</code>,多角度思考问题.</li>
-<li><code>低调</code>,不骄不躁,不卑不亢,做好自己.</li>
-</ol>
-<hr>
-<p>写了很多,最后想说,去做吧, do it now.</p>
-  <!-- 标签别名 -->
-<!--  <h3>You got a dream, you gotta protect it. People can’t do something themselves,they wanna tell you you can’t do it.If you want something, go get it. Period. </h3> -->
-
-            <!-- 如果开启评论功能 -->
-            
-            <hr>
-
-            
-
-            
+<p><img src="/2018/07/23/原型和原型链/WX20190723-120150@2x.png" alt="img"></p>
 
 
-            
-
-            
-
-
-
-            
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-            <!-- Featured Tags -->
-            
-            <section>
-                <!-- no hr -->
-                <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                <div class="tags">
-                    
-                    
-                    <a href="/tags/#JS" title="JS" rel="2">
-                        JS</a>
-                    
-                    
-                    
-                    
-                    
-                    <a href="/tags/#ios" title="ios" rel="2">
-                        ios</a>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <a href="/tags/#English" title="English" rel="2">
-                        English</a>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <a href="/tags/#Navicat" title="Navicat" rel="2">
-                        Navicat</a>
-                    
-                    
-                    
-                    
-                    
-                    <a href="/tags/#Vue" title="Vue" rel="3">
-                        Vue</a>
-                    
-                    
-                    
-                    <a href="/tags/#JavaScript" title="JavaScript" rel="2">
-                        JavaScript</a>
-                    
-                    
-                    
-                    
-                    
-                    <a href="/tags/#time" title="time" rel="2">
-                        time</a>
-                    
-                    
-                    
-                    
-                    
-                    <a href="/tags/#Git" title="Git" rel="2">
-                        Git</a>
-                    
-                    
-                </div>
-            </section>
-            
-
-            <!-- Short About -->
-            <section class="visible-md visible-lg">
                 <hr>
-                <h5><a href="/about/">ABOUT ME</a></h5>
-                <div class="short-about">
 
+                
+
+                <ul class="pager">
                     
-                    <img src="/img/avatar-zxd.jpeg" />
+                    <li class="previous">
+                        <a href="/2018/07/26/2018-7-26-Reading/" data-toggle="tooltip" data-placement="top"
+                            title="Trump visit to U.K. inspires yearning for a 'Love Actually' moment">&larr; Previous Post</a>
+                    </li>
                     
-
                     
-                    <p>
-                        从前车马很慢 书信很远
-                    </p>
+                    <li class="next">
+                        <a href="/2018/06/28/2018-8-9-MongoDB/" data-toggle="tooltip" data-placement="top"
+                            title="MongoDB基础知识总结">Next Post &rarr;</a>
+                    </li>
                     
+                </ul>
 
-                    <!-- SNS Link -->
-                    <ul class="list-inline">
-                        
-                        
-                        
+                
 
-                        
+                
 
-                        
-
-                        
-
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Friends Blog -->
+            </div>
+            <!-- Side Catalog Container -->
             
+
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 这里去掉Feature Tags -->
+                <!--  -->
+                <!-- <section> -->
+                <!-- no hr -->
+                <!-- <h5><a href="/tags/">FEATURED TAGS</a></h5> -->
+                <!-- <div class="tags"> -->
+                <!--  -->
+                <!-- <a class="tag" href="/tags/#JS" title="JS">JS</a> -->
+                <!--  -->
+                <!-- </div> -->
+                <!-- </section> -->
+                <!--  -->
+
+
+                <!-- Friends Blog -->
+                
+            </div>
+
         </div>
-        
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
     <!-- Footer -->
     <!-- Footer -->
